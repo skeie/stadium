@@ -13,8 +13,10 @@ import {
 import { ImagePicker, Location, Permissions } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { get } from '../api/fetch';
+import LinksScreen from './LinksScreen';
 
 export default class HomeScreen extends React.Component {
+    state = { resultdata: null };
     static navigationOptions = {
         header: null,
     };
@@ -26,19 +28,25 @@ export default class HomeScreen extends React.Component {
             exif: true,
         });
 
-        const location = {
-            lat: result.exif.GPSLatitude,
-            long: result.exif.GPSLongitude,
-            date: result.exif.GPSDateStamp,
-        };
-        console.log(JSON.stringify(await get('/football', location)));
-
         if (!result.cancelled) {
-            this.setState({ image: result.uri });
+            const location = {
+                lat: result.exif.GPSLatitude,
+                long: result.exif.GPSLongitude,
+                date: result.exif.GPSDateStamp,
+            };
+            const resultdata = await get('/football', location);
+            resultdata.uri = result.uri;
+            resultdata.date = location.date.split(':').join('/');
+            this.setState({
+                resultdata,
+            });
         }
     };
 
     render() {
+        if (this.state.resultdata) {
+            return <LinksScreen {...this.state.resultdata} />;
+        }
         return (
             <View style={styles.container}>
                 <Text style={{ color: 'red' }} onPress={this._onGetPhoto}>
