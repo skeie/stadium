@@ -10,12 +10,22 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+// $FlowFixMe
 import { ImagePicker, Location, Permissions } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { get } from '../api/fetch';
 import LinksScreen from './LinksScreen';
+import colors from '../constants/Colors';
 
-export default class HomeScreen extends React.Component {
+import type { Props as Resultdata } from './LinksScreen';
+
+// add google UI add button here
+
+type State = {
+    resultdata: ?Resultdata,
+};
+
+export default class HomeScreen extends React.Component<*, State> {
     state = { resultdata: null };
     static navigationOptions = {
         header: null,
@@ -49,8 +59,8 @@ export default class HomeScreen extends React.Component {
         }
         return (
             <View style={styles.container}>
-                <Text style={{ color: 'red' }} onPress={this._onGetPhoto}>
-                    Get Photo
+                <Text style={{ color: colors.primaryText }} onPress={this._onGetPhoto}>
+                    Choose photo
                 </Text>
             </View>
         );
@@ -60,7 +70,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.primary,
         justifyContent: 'center',
         alignItems: 'center',
     },

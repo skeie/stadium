@@ -4,8 +4,9 @@ import React from 'react';
 import { ScrollView, StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Poppins } from '../components/StyledText';
+import colors from '../constants/Colors';
 
-type Props = {
+export type Props = {
     stadium: { capacity: number, name: string },
     startTime: string,
     homeTeam: string,
@@ -40,10 +41,10 @@ const getGoalScorer = (goalScorers: Array<GoalScorer>, team: string) =>
 export default class LinksScreen extends React.Component<Props, *> {
     static navigationOptions = {
         title: 'Add',
+        tabBarVisible: false,
     };
 
     render() {
-        debugger;
         if (!this.props.stadium) {
             return null;
         }
@@ -54,7 +55,7 @@ export default class LinksScreen extends React.Component<Props, *> {
                     contentContainerStyle={{
                         flexGrow: 1,
                         justifyContent: 'space-around',
-                        backgroundColor: '#ADF1D2',
+                        backgroundColor: colors.primary,
                     }}>
                     <View width="100%" flexDirection="column" padding={5}>
                         <View flexDirection="row">
@@ -102,7 +103,7 @@ export default class LinksScreen extends React.Component<Props, *> {
                 <View
                     flexDirection="row"
                     height="15%"
-                    backgroundColor="#ADF1D2"
+                    backgroundColor={colors.primary}
                     alignItems="center"
                     justifyContent="space-around">
                     <TouchableOpacity
