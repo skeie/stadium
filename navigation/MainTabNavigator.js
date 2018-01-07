@@ -18,12 +18,8 @@ export default TabNavigator(
         Home: {
             screen: HomeScreen,
         },
-        Links: {
+        Statistics: {
             screen: LinksScreen,
-        },
-
-        Settings: {
-            screen: SettingsScreen,
         },
     },
     {
@@ -38,17 +34,8 @@ export default TabNavigator(
                                 ? `ios-information-circle${focused ? '' : '-outline'}`
                                 : 'md-information-circle';
                         break;
-                    case 'Links':
-                        iconName =
-                            Platform.OS === 'ios'
-                                ? `ios-link${focused ? '' : '-outline'}`
-                                : 'md-link';
-                        break;
-                    case 'Settings':
-                        iconName =
-                            Platform.OS === 'ios'
-                                ? `ios-options${focused ? '' : '-outline'}`
-                                : 'md-options';
+                    case 'Statistics':
+                        iconName = Platform.OS === 'ios' ? `md-stats` : 'md-options';
                 }
                 return (
                     <Ionicons

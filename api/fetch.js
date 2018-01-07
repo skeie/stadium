@@ -5,12 +5,10 @@ export const baseURl = __DEV__ ? 'http://localhost:8080' : 'https://zyada.app.it
 let authorization = '';
 
 function _appUrl(url, params) {
-    console.log('url', baseURl + url + '?' + queryString.stringify(params));
     return baseURl + url + '?' + queryString.stringify(params);
 }
 
 export function setAuthorizationToken(token) {
-    console.log('token', token);
     authorization = token;
 }
 

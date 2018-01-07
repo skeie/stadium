@@ -40,8 +40,7 @@ const getGoalScorer = (goalScorers: Array<GoalScorer>, team: string) =>
 
 export default class LinksScreen extends React.Component<Props, *> {
     static navigationOptions = {
-        title: 'Add',
-        tabBarVisible: false,
+        title: 'Statistics',
     };
 
     render() {

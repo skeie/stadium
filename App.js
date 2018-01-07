@@ -43,6 +43,7 @@ export default class App extends React.Component {
                 'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
                 poppins: require('./assets/fonts/Poppins-Regular.ttf'),
                 italic: require('./assets/fonts/Poppins-LightItalic.ttf'),
+                'poppins-bold': require('./assets/fonts/Poppins-SemiBold.ttf'),
             }),
         ]);
     };
