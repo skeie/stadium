@@ -17,18 +17,6 @@ export type Props = {
     date: string,
 };
 
-// const this.props = {
-//     stadium: { capacity: 25700, name: 'Craven Cottage' },
-//     startTime: '18:30',
-//     homeTeam: 'Fulham',
-//     awayTeam: 'Derby County',
-//     result: { goalsHomeTeam: 1, goalsAwayTeam: 1 },
-//     goalScorers: [
-//         { name: 'T. Cairney', minute: ['30'], team: 'Fulham' },
-//         { name: 'M. Vydra', minute: ['50'], team: 'Derby County' },
-//     ],
-// };
-
 type GoalScorer = {
     name: string,
     minute: Array<string>,
@@ -44,6 +32,18 @@ export default class LinksScreen extends React.Component<Props, *> {
     };
 
     render() {
+        // this.props = {
+        //     date: '23.12.17',
+        //     stadium: { capacity: 25700, name: 'Craven Cottage' },
+        //     startTime: '18:30',
+        //     homeTeam: 'Fulham',
+        //     awayTeam: 'Derby County',
+        //     result: { goalsHomeTeam: 1, goalsAwayTeam: 1 },
+        //     goalScorers: [
+        //         { name: 'T. Cairney', minute: ['30'], team: 'Fulham' },
+        //         { name: 'M. Vydra', minute: ['50'], team: 'Derby County' },
+        //     ],
+        // };
         if (!this.props.stadium) {
             return null;
         }
@@ -59,19 +59,19 @@ export default class LinksScreen extends React.Component<Props, *> {
                     <View width="100%" flexDirection="column" padding={5}>
                         <View flexDirection="row">
                             <Entypo name="location-pin" size={25} color="#553555" />
+                            <Poppins style={{ marginLeft: 2 }} type="header">
+                                {this.props.stadium.name}
+                            </Poppins>
+                        </View>
+                        <View marginLeft={27} marginRight={5}>
                             <View
                                 flex={1}
                                 flexDirection="row"
                                 alignItems="center"
                                 justifyContent="space-between">
-                                <Poppins style={{ marginLeft: 2 }} type="header">
-                                    {this.props.stadium.name}
-                                </Poppins>
+                                <Poppins>Capacity: {this.props.stadium.capacity}</Poppins>
                                 <Poppins>{this.props.date}</Poppins>
                             </View>
-                        </View>
-                        <View marginLeft={27}>
-                            <Poppins>Capacity: {this.props.stadium.capacity}</Poppins>
                             <Poppins>Home team: {this.props.homeTeam}</Poppins>
                         </View>
                     </View>
