@@ -20,7 +20,7 @@ import { MonoText, Poppins } from '../components/StyledText';
 import { get } from '../api/fetch';
 import LinksScreen from './LinksScreen';
 import colors from '../constants/Colors';
-
+import Loading from '../components/Loading';
 import type { Props as Resultdata } from './LinksScreen';
 
 type Footballclub = {
@@ -115,7 +115,6 @@ export default class HomeScreen extends React.Component<*, State> {
 
     handleClubSelect = async (club: Footballclub) => {
         const that = this;
-        debugger;
         const resultdata = await get('/football/searchResult', { ...club, date: this.date });
         resultdata.uri = this.uri;
         resultdata.date = this.date;
@@ -206,6 +205,7 @@ export default class HomeScreen extends React.Component<*, State> {
                             ))}
                     </View>
                 </Modal>
+                <Loading />
                 <FloatingAction actions={actions} onPressItem={this._onGetPhoto} />
             </View>
         );
