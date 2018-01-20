@@ -2,6 +2,7 @@
 
 import React from 'react';
 import GetPhoto from '../containers/GetPhoto';
+// $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 
 export default class GetPhotoScreen extends React.Component<*, *> {

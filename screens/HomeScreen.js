@@ -24,7 +24,7 @@ import Loading from '../components/Loading';
 import type { Props as Resultdata } from './LinksScreen';
 import HomeScreenContainer from '../containers/HomeScreen';
 
-export default class HomeScreen extends React.Component<null> {
+export default class HomeScreen extends React.Component<*, *> {
     static navigationOptions = {
         header: null,
     };

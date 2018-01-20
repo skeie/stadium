@@ -7,10 +7,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import EmptyView from '../components/EmptyHomeView';
 import { FloatingAction } from 'react-native-floating-action';
 import EmptyHomeView from '../components/EmptyHomeView';
-import type { MatchView } from './MatchView';
+import type { Match } from '../components/MatchView';
 import type { Props as Resultdata } from '../screens/LinksScreen';
 import MatchViewContainer from '../containers/MatchView';
 import colors from '../constants/Colors';
+
+type Item = {
+    item: Match,
+};
 
 type Footballclub = {
     capacity: string,
@@ -38,7 +42,7 @@ const actions = [
 class HomeScreen extends Component<*, State> {
     state = { resultdata: null, text: '', showErrorModal: false };
 
-    keyExtractor = (item, index: number) => `${item.uri}-${item.date}-${index}`;
+    keyExtractor = (item: Match, index: number) => `${item.uri}-${item.date}-${index}`;
 
     renderSeparator = () => <View height={5} backgroundColor={colors.primaryText} />;
 

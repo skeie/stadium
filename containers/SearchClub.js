@@ -45,7 +45,7 @@ class SearchClub extends Component<Props, State> {
 
     handleClubSelect = async (club: Footballclub) => {
         const that = this;
-        const resultdata = await get('/football/searchResult', { ...club, date: this.date });
+        const resultdata = await get('/football/searchResult', { ...club, date: this.props.date });
         resultdata.uri = this.props.uri;
         resultdata.date = this.props.date;
     };
