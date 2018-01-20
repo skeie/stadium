@@ -11,31 +11,24 @@ type State = {
     animated: Animated.Value,
 };
 
-class Loading extends Component<*, State> {
-    state = {
-        animated: new Animated.Value(0),
-    };
+class Loading extends Component<*, *> {
+    animated = new Animated.Value(0);
+
     componentDidMount() {
         this.startAnimation();
     }
 
     startAnimation = () => {
-        Animated.timing(this.state.animated, {
+        this.animated.setValue(0);
+        Animated.timing(this.animated, {
             duration: 1000,
             toValue: 1,
             useNativeDriver: true,
-        }).start(() => {
-            this.setState(
-                () => ({
-                    animated: new Animated.Value(0),
-                }),
-                this.startAnimation,
-            );
-        });
+        }).start(this.startAnimation);
     };
 
     render() {
-        const interpolation = this.state.animated.interpolate({
+        const interpolation = this.animated.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '360deg'],
         });
