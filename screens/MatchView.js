@@ -2,6 +2,7 @@
 
 import React from 'react';
 import MatchView from '../containers/MatchView';
+import MatchViewWithData from '../containers/MatchViewWithData';
 
 export default class MatchViewScreen extends React.Component<*, *> {
     static navigationOptions = {
@@ -9,6 +10,9 @@ export default class MatchViewScreen extends React.Component<*, *> {
     };
 
     render() {
+        if (this.props.navigation.state.params.match) {
+            return <MatchViewWithData {...this.props.navigation.state.params} />;
+        }
         return <MatchView {...this.props.navigation.state.params} />;
     }
 }

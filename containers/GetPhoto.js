@@ -44,21 +44,19 @@ class GetPhoto extends Component<*, State> {
 
         if (!result.cancelled) {
             this.date = this.getDate(result.exif);
-            this.uri = result.uri;
+            this.uri = `data:image/png;base64,${result.base64}`;
             if (!result.exif.GPSLatitude) {
-                this.setState({
-                    showErrorModal: true,
-                });
+                // Pretend to be smart
+                setTimeout(() => {
+                    this.props.showSearchClubModal(this.uri, this.date);
+                }, 2000);
             } else {
                 const location = {
                     lat: result.exif.GPSLatitude,
                     long: result.exif.GPSLongitude,
                     date: this.date,
                 };
-                const resultdata = await get('/football', location);
-                resultdata.uri = `data:image/png;base64,${result.base64}`;
-                resultdata.date = this.date;
-                this.props.navigation.navigate('MatchView', { ...resultdata, isEdit: true });
+                this.props.navigation.navigate('MatchView', { ...location, uri: this.uri });
             }
         } else {
             this.props.onBack();

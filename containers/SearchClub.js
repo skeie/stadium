@@ -1,12 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
-import Modal from 'react-native-modal';
 
-import { MonoText, Poppins } from '../components/StyledText';
-import colors from '../constants/Colors';
 import { get } from '../api/fetch';
+import { Connect, query, mutation } from 'urql';
+import type { Match } from '../components/MatchView';
+import { searchClubQL } from './SearchClubQL';
+import Query from '../query/Query';
+import { GetResultBytFootbalTeam } from './GetResultBytFootbalTeamGQL';
+
+import SearchClubUI from '../components/SearchClub';
 
 type Footballclub = {
     capacity: string,
@@ -17,113 +20,80 @@ type Footballclub = {
 type FootballclubResult = Array<Footballclub>;
 
 type State = {
-    footballclubResult?: FootballclubResult,
+    footballclubResult: FootballclubResult,
     text: string,
+    isVisible: boolean,
 };
 
 type Props = {
     uri: string,
     date: string,
+    onNext: Match => void,
 };
 
 class SearchClub extends Component<Props, State> {
+    state = {
+        text: '',
+        isVisible: true,
+        footballclubResult: [],
+    };
+
     timeout: number;
 
     onHandleTextInput = (text: string) => {
         clearTimeout(this.timeout);
-        this.timeout = setTimeout(async () => {
-            const footballclubResult = await get('/football/footballclub', {
-                clubname: text,
-            });
-            this.setState({
-                footballclubResult,
-            });
+        this.timeout = setTimeout(() => {
+            this.setState({ text });
         }, 600);
-
-        this.setState({ text });
     };
 
-    handleClubSelect = async (club: Footballclub) => {
-        const that = this;
-        const resultdata = await get('/football/searchResult', { ...club, date: this.props.date });
-        resultdata.uri = this.props.uri;
-        resultdata.date = this.props.date;
+    getMatchData = (club: Footballclub) => {
+        this.setState({
+            data: { ...club, date: this.props.date },
+        });
     };
+
+    handleClubSelect = ({ matchBasedOnFootballTeam }) => {
+        matchBasedOnFootballTeam.uri = this.props.uri;
+        matchBasedOnFootballTeam.date = this.props.date;
+        this.setState({
+            isVisible: false,
+            data: null,
+        });
+
+        this.props.onNext(matchBasedOnFootballTeam);
+    };
+
+    getQuery = () => (this.state.text ? query(searchClubQL, { clubName: this.state.text }) : null);
 
     render() {
+        if (this.state.data) {
+            return (
+                <Query
+                    onLoaded={this.handleClubSelect}
+                    queryData={{ query: GetResultBytFootbalTeam, data: this.state.data }}
+                />
+            );
+        }
         return (
-            <Modal isVisible>
-                <View style={styles.modalContainer}>
-                    <Poppins style={{ marginBottom: 20 }} type="header">
-                        Oops, we could't not find anything with that picture, sorry :-(
-                    </Poppins>
-                    <Poppins style={{ width: '100%' }}>
-                        Please fill out the football club name below to proceed
-                    </Poppins>
-                    <TextInput
-                        width="100%"
-                        height={50}
-                        autoFocus
-                        placeholder="Football stadium name"
-                        value={this.state.text}
-                        onChangeText={this.onHandleTextInput}
-                    />
-
-                    <Poppins width="100%" type="subHeader">
-                        Result:
-                    </Poppins>
-
-                    {this.state.footballclubResult &&
-                        this.state.footballclubResult.map(result => (
-                            <TouchableOpacity
-                                activeOpacity={0.6}
-                                style={{ width: '100%' }}
-                                key={result.name}
-                                onPress={() => {
-                                    this.handleClubSelect(result);
-                                }}>
-                                <View
-                                    flexDirection="row"
-                                    alignItems="center"
-                                    width="100%"
-                                    justifyContent="space-between">
-                                    <View marginVertical={10} width="60%">
-                                        <View flexDirection="row">
-                                            <Poppins type="bold">Club: </Poppins>
-                                            <Poppins>{result.name}</Poppins>
-                                        </View>
-                                        <View flexDirection="row">
-                                            <Poppins type="bold">Stadium: </Poppins>
-                                            <Poppins numberOfLines={1}>
-                                                {result.stadiumName}
-                                            </Poppins>
-                                        </View>
-                                    </View>
-                                    <Poppins
-                                        style={{
-                                            borderRadius: 5,
-                                            padding: 2,
-                                            borderWidth: 1,
-                                            borderColor: colors.primaryText,
-                                        }}>
-                                        Select
-                                    </Poppins>
-                                </View>
-                            </TouchableOpacity>
-                        ))}
-                </View>
-            </Modal>
+            <Connect
+                query={this.getQuery()}
+                children={({ loaded, fetching, refetch, data = {}, error }) => {
+                    let footballclubResult = [];
+                    if (data && data.getClub) footballclubResult = data.getClub;
+                    return (
+                        <SearchClubUI
+                            text={this.state.text}
+                            isVisible={this.state.isVisible}
+                            footballclubResult={footballclubResult}
+                            onHandleTextInput={this.onHandleTextInput}
+                            getMatchData={this.getMatchData}
+                        />
+                    );
+                }}
+            />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    modalContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.primary,
-        padding: 20,
-    },
-});
 
 export default SearchClub;

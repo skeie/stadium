@@ -3,6 +3,11 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+import { Provider, Client } from 'urql';
+
+const client = new Client({
+    url: 'http://localhost:4000',
+});
 
 export default class App extends React.Component {
     state = {
@@ -20,11 +25,13 @@ export default class App extends React.Component {
             );
         } else {
             return (
-                <View style={styles.container}>
-                    {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                    {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-                    <RootNavigation />
-                </View>
+                <Provider client={client}>
+                    <View style={styles.container}>
+                        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                        {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+                        <RootNavigation />
+                    </View>
+                </Provider>
             );
         }
     }

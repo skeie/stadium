@@ -33,7 +33,7 @@ type GoalScorer = {
 
 const MatchView = (props: Props) => {
     return (
-        <View flex={1}>
+        <View flex={1} backgroundColor={colors.primary}>
             <ScrollView
                 contentContainerStyle={{
                     height: height / 1.5,
@@ -78,40 +78,6 @@ const MatchView = (props: Props) => {
                     <TeamUI team={props.awayTeam} goalScorers={props.goalScorers} second />
                 </View>
             </ScrollView>
-            {props.isEdit && (
-                <View
-                    flexDirection="row"
-                    height="15%"
-                    backgroundColor={colors.primary}
-                    alignItems="center"
-                    justifyContent="space-around">
-                    <TouchableOpacity
-                        style={{
-                            width: '40%',
-                            borderColor: '#553555',
-                            borderWidth: 1,
-                            alignItems: 'center',
-                            padding: 10,
-                            borderRadius: 10,
-                            marginBottom: 10,
-                        }}>
-                        <Poppins>Discard</Poppins>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={props.onPostMatch}
-                        style={{
-                            width: '40%',
-                            borderColor: '#553555',
-                            borderWidth: 1,
-                            alignItems: 'center',
-                            padding: 10,
-                            borderRadius: 10,
-                            marginBottom: 10,
-                        }}>
-                        <Poppins>Save</Poppins>
-                    </TouchableOpacity>
-                </View>
-            )}
         </View>
     );
 };

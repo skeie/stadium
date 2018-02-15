@@ -1,3 +1,5 @@
+// @flow
+
 import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
@@ -7,6 +9,8 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 
 import Photo from '../screens/GetPhoto';
 import MatchView from '../screens/MatchView';
+
+import SearchClubModal from '../screens/Modals/SearchClub';
 
 const RootStackNavigator = StackNavigator(
     {
@@ -29,6 +33,17 @@ const RootStackNavigator = StackNavigator(
     },
 );
 
+const MainModalNavigator = StackNavigator(
+    {
+        RootStackNavigator: { screen: RootStackNavigator },
+        SearchClubModal: { screen: SearchClubModal },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
+    },
+);
+
 export default class RootNavigator extends React.Component {
     componentDidMount() {
         this._notificationSubscription = this._registerForPushNotifications();
@@ -39,7 +54,7 @@ export default class RootNavigator extends React.Component {
     }
 
     render() {
-        return <RootStackNavigator />;
+        return <MainModalNavigator />;
     }
 
     _registerForPushNotifications() {

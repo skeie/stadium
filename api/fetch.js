@@ -4,6 +4,16 @@ export const baseURl = __DEV__ ? 'http://localhost:8080' : 'https://zyada.app.it
 
 let authorization = '';
 
+function makeid() {
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 function _appUrl(url, params) {
     return baseURl + url + '?' + queryString.stringify(params);
 }
@@ -32,29 +42,35 @@ function setHeaders(method, body, optHeader) {
     };
 }
 
-export async function postMultipart(url, uri) {
-    const image = {
-        uri: uri.path,
+export const uploadPhoto = localUri => {
+    const formData = new FormData();
+    const data = {
+        uri: localUri,
+        name: `${makeid()}.jpg`,
         type: 'image/jpeg',
-        name: 'temp.jpg',
     };
-    // Instantiate a FormData() object
-    const imgBody = new FormData();
-    // append the image to the object with the title 'image'
-    imgBody.append('image', image);
-    // Perform the request. Note the content type - very important
-    const response = await fetch(baseURl + url, {
+
+    formData.append('data', data);
+
+    const options = {
         method: 'POST',
+        body: formData,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${authorization}`,
         },
-        body: imgBody,
-    });
+    };
 
-    return _handleResponse(response);
-}
+    return fetch(`https://api.graph.cool/file/v1/cjdizt45h14ca016541zn4b91`, options)
+        .then(response => {
+            return response.json();
+        })
+        .then(image => {
+            console.log(image);
+            return image;
+        })
+        .catch(error => console.error(`Error uploading image`));
+};
 
 export async function get(url, params) {
     const response = await fetch(_appUrl(url, params), setHeaders('GET'));

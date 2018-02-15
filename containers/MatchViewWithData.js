@@ -51,47 +51,31 @@ class MatchView extends Component<Props, *> {
 
         return (
             <Connect
-                query={query(MatchQuery, rest)}
                 mutation={{
                     addMatch: mutation(MatchMutation),
                 }}
                 children={({ loaded, fetching, refetch, data, error, addMatch }) => {
-                    if (data && data.match) {
-                        let match = {
-                            ...this.props,
-                            ...data.match,
-                        };
-                        match.uri =
-                            'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg';
-                        match = omitDeep(match, '__typename');
-                        return (
-                            <View flex={1}>
-                                <MatchViewUI onPostMatch={this.handlePostMatch} {...match} />
-                                <View
-                                    flexDirection="row"
-                                    height="15%"
-                                    backgroundColor={colors.primary}
-                                    alignItems="center"
-                                    justifyContent="space-around">
-                                    <Button style={{ width: '40%' }}>Discard</Button>
+                    return (
+                        <View flex={1}>
+                            <MatchViewUI onPostMatch={this.handlePostMatch} {...this.props.match} />
+                            <View
+                                flexDirection="row"
+                                height="15%"
+                                backgroundColor={colors.primary}
+                                alignItems="center"
+                                justifyContent="space-around">
+                                <Button style={{ width: '40%' }}>Discard</Button>
 
-                                    <Button
-                                        style={{ width: '40%' }}
-                                        onPress={() => {
-                                            addMatch(match);
-                                        }}>
-                                        Save
-                                    </Button>
-                                </View>
+                                <Button
+                                    style={{ width: '40%' }}
+                                    onPress={() => {
+                                        addMatch(match);
+                                    }}>
+                                    Save
+                                </Button>
                             </View>
-                        );
-                    } else {
-                        return (
-                            <View flex={1}>
-                                <Loading />
-                            </View>
-                        );
-                    }
+                        </View>
+                    );
                 }}
             />
         );

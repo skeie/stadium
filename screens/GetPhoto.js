@@ -15,7 +15,17 @@ export default class GetPhotoScreen extends React.Component<*, *> {
         this.props.navigation.dispatch(backAction);
     };
 
+    showSearchClubModal = (uri: string, date: string) => {
+        this.props.navigation.navigate('SearchClubModal', { uri, date });
+    };
+
     render() {
-        return <GetPhoto {...this.props} onBack={this.handleBack} />;
+        return (
+            <GetPhoto
+                {...this.props}
+                showSearchClubModal={this.showSearchClubModal}
+                onBack={this.handleBack}
+            />
+        );
     }
 }
