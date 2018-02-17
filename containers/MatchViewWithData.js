@@ -68,8 +68,10 @@ class MatchView extends Component<Props, *> {
 
                                 <Button
                                     style={{ width: '40%' }}
-                                    onPress={() => {
-                                        addMatch(match);
+                                    onPress={async () => {
+                                        const match = omitDeep(this.props.match, '__typename');
+                                        await addMatch({ ...match, uri: this.image });
+                                        this.props.goBack();
                                     }}>
                                     Save
                                 </Button>

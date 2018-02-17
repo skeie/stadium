@@ -88,6 +88,7 @@ class SearchClub extends Component<Props, State> {
                             footballclubResult={footballclubResult}
                             onHandleTextInput={this.onHandleTextInput}
                             getMatchData={this.getMatchData}
+                            fetching={fetching}
                         />
                     );
                 }}

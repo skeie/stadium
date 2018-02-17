@@ -20,10 +20,7 @@ export type Match = {
     date: string,
 };
 
-export type Props = Match & {
-    onPostMatch: Match => void,
-    isEdit: boolean,
-};
+export type Props = Match;
 
 type GoalScorer = {
     name: string,

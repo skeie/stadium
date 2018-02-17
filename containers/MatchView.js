@@ -7,7 +7,6 @@ import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { post } from '../api/fetch';
 import { Connect, query, mutation } from 'urql';
-import { NavigationActions } from 'react-navigation';
 import colors from '../constants/Colors';
 import { MatchMutation, MatchQuery } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
@@ -24,13 +23,6 @@ type Props = {
 
 class MatchView extends Component<Props, *> {
     image: string;
-
-    handlePostMatch = async match => {
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'ScreenA', params: { match } })],
-        });
-    };
 
     componentDidMount() {
         if (!__DEV__) {
@@ -66,7 +58,7 @@ class MatchView extends Component<Props, *> {
                         match = omitDeep(match, '__typename');
                         return (
                             <View flex={1}>
-                                <MatchViewUI onPostMatch={this.handlePostMatch} {...match} />
+                                <MatchViewUI {...match} />
                                 <View
                                     flexDirection="row"
                                     height="15%"

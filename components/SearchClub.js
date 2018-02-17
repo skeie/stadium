@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
-import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { TextInput, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { MonoText, Poppins } from './StyledText';
 import colors from '../constants/Colors';
+import Loading from './Loading';
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -28,6 +29,7 @@ type Props = {
     onHandleTextInput: (text: string) => void,
     getMatchData: (club: Footballclub) => void,
     footballclubResult?: FootballclubResult,
+    fetching?: boolean,
 };
 
 const SearchClub = ({
@@ -35,6 +37,7 @@ const SearchClub = ({
     onHandleTextInput,
     footballclubResult = [],
     getMatchData,
+    fetching,
 }: Props) => {
     return (
         <Modal isVisible={isVisible}>
@@ -56,43 +59,47 @@ const SearchClub = ({
                 <Poppins width="100%" type="subHeader">
                     Result:
                 </Poppins>
-
-                {footballclubResult &&
-                    footballclubResult.map(result => (
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            style={{ width: '100%' }}
-                            key={result.name}
-                            onPress={() => {
-                                getMatchData(result);
-                            }}>
-                            <View
-                                flexDirection="row"
-                                alignItems="center"
-                                width="100%"
-                                justifyContent="space-between">
-                                <View marginVertical={10} width="60%">
-                                    <View flexDirection="row">
-                                        <Poppins type="bold">Club: </Poppins>
-                                        <Poppins>{result.name}</Poppins>
+                {fetching && <Loading />}
+                {footballclubResult && (
+                    <ScrollView style={{ width: '100%' }}>
+                        {footballclubResult.map(result => (
+                            <TouchableOpacity
+                                activeOpacity={0.6}
+                                key={result.name}
+                                onPress={() => {
+                                    getMatchData(result);
+                                }}>
+                                <View
+                                    flexDirection="row"
+                                    alignItems="center"
+                                    width="100%"
+                                    justifyContent="space-between">
+                                    <View marginVertical={10} width="60%">
+                                        <View flexDirection="row">
+                                            <Poppins type="bold">Club: </Poppins>
+                                            <Poppins>{result.name}</Poppins>
+                                        </View>
+                                        <View flexDirection="row">
+                                            <Poppins type="bold">Stadium: </Poppins>
+                                            <Poppins numberOfLines={1}>
+                                                {result.stadiumName}
+                                            </Poppins>
+                                        </View>
                                     </View>
-                                    <View flexDirection="row">
-                                        <Poppins type="bold">Stadium: </Poppins>
-                                        <Poppins numberOfLines={1}>{result.stadiumName}</Poppins>
-                                    </View>
+                                    <Poppins
+                                        style={{
+                                            borderRadius: 5,
+                                            padding: 2,
+                                            borderWidth: 1,
+                                            borderColor: colors.primaryText,
+                                        }}>
+                                        Select
+                                    </Poppins>
                                 </View>
-                                <Poppins
-                                    style={{
-                                        borderRadius: 5,
-                                        padding: 2,
-                                        borderWidth: 1,
-                                        borderColor: colors.primaryText,
-                                    }}>
-                                    Select
-                                </Poppins>
-                            </View>
-                        </TouchableOpacity>
-                    ))}
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                )}
             </View>
         </Modal>
     );
