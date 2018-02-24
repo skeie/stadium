@@ -3,7 +3,7 @@
 import { Text, StyleSheet } from 'react-native';
 import * as React from 'react';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     style: { color: '#553555', fontFamily: 'poppins' },
     bold: { color: '#553555', fontFamily: 'poppins-bold' },
     header: { color: '#553555', fontSize: 20, fontFamily: 'poppins' },

@@ -23,6 +23,7 @@ type State = {
     footballclubResult: FootballclubResult,
     text: string,
     isVisible: boolean,
+    data?: any,
 };
 
 type Props = {
@@ -53,7 +54,7 @@ class SearchClub extends Component<Props, State> {
         });
     };
 
-    handleClubSelect = ({ matchBasedOnFootballTeam }) => {
+    handleClubSelect = ({ matchBasedOnFootballTeam }: any) => {
         matchBasedOnFootballTeam.uri = this.props.uri;
         matchBasedOnFootballTeam.date = this.props.date;
         this.setState({

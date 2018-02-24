@@ -32,6 +32,7 @@
 ; Ignore various node_modules
 <PROJECT_ROOT>/node_modules/react-native-gesture-handler/.*
 <PROJECT_ROOT>/node_modules/react-navigation/.*
+<PROJECT_ROOT>/node_modules/graphql/.*
 <PROJECT_ROOT>/node_modules/@storybook/.*
 <PROJECT_ROOT>/node_modules/expo/.*
 <PROJECT_ROOT>/node_modules/xdl/.*

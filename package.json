@@ -1,27 +1,27 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
-  "private": true,
-  "scripts": {
-    "test": "node ./node_modules/jest/bin/jest.js --watch"
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "dependencies": {
-    "@expo/samples": "2.1.1",
-    "@storybook/cli": "^3.3.9",
-    "expo": "^24.0.0",
-    "omit-deep-lodash": "^1.0.0",
-    "query-string": "^5.0.1",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
-    "react-native-floating-action": "^1.5.0",
-    "react-native-modal": "^4.1.1",
-    "react-navigation": "^1.0.0-beta.21",
-    "urql": "^0.1.0"
-  },
-  "devDependencies": {
-    "flow-bin": "0.56.0",
-    "jest-expo": "^24.0.0"
-  }
+    "main": "node_modules/expo/AppEntry.js",
+    "private": true,
+    "scripts": {
+        "test": "node ./node_modules/jest/bin/jest.js --watch"
+    },
+    "jest": {
+        "preset": "jest-expo"
+    },
+    "dependencies": {
+        "@expo/samples": "2.1.1",
+        "@storybook/cli": "^3.3.9",
+        "expo": "^24.0.0",
+        "omit-deep-lodash": "^1.0.0",
+        "query-string": "^5.0.1",
+        "react": "16.0.0",
+        "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+        "react-native-floating-action": "^1.5.0",
+        "react-native-modal": "^4.1.1",
+        "react-navigation": "^1.0.0",
+        "urql": "^0.1.0"
+    },
+    "devDependencies": {
+        "flow-bin": "0.56.0",
+        "jest-expo": "^24.0.0"
+    }
 }

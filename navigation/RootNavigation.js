@@ -1,7 +1,10 @@
 // @flow
 
-import { Notifications } from 'expo';
 import React from 'react';
+import { UIManager } from 'react-native';
+// $FlowFixMe
+import { Notifications } from 'expo';
+// $FlowFixMe
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
@@ -9,55 +12,87 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 
 import Photo from '../screens/GetPhoto';
 import MatchView from '../screens/MatchView';
+import Login from '../Login/LoginScreen';
 
 import SearchClubModal from '../screens/Modals/SearchClub';
+import { isSignedIn } from '../util/auth';
+import Loading from '../components/Loading';
 
-const RootStackNavigator = StackNavigator(
-    {
-        Main: {
-            screen: MainTabNavigator,
-        },
-        Photo: {
-            screen: Photo,
-        },
-        MatchView: {
-            screen: MatchView,
-        },
-    },
-    {
-        navigationOptions: () => ({
-            headerTitleStyle: {
-                fontWeight: 'normal',
+UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+
+const rootStackNavigator = (signedIn: boolean) =>
+    StackNavigator(
+        {
+            Main: {
+                screen: MainTabNavigator,
             },
-        }),
-    },
-);
+            Photo: {
+                screen: Photo,
+            },
+            MatchView: {
+                screen: MatchView,
+            },
+            Login: {
+                screen: Login,
+            },
+        },
+        {
+            initialRouteName: signedIn ? 'Main' : 'Login',
+            navigationOptions: () => ({
+                headerTitleStyle: {
+                    fontWeight: 'normal',
+                },
+            }),
+        },
+    );
 
-const MainModalNavigator = StackNavigator(
-    {
-        RootStackNavigator: { screen: RootStackNavigator },
-        SearchClubModal: { screen: SearchClubModal },
-    },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-    },
-);
+const mainModalNavigator = (signedIn: boolean) =>
+    StackNavigator(
+        {
+            RootStackNavigator: { screen: rootStackNavigator(signedIn) },
+            SearchClubModal: { screen: SearchClubModal },
+        },
+        {
+            mode: 'modal',
+            headerMode: 'none',
+        },
+    );
 
-export default class RootNavigator extends React.Component {
+export default class RootNavigator extends React.Component<*, *> {
+    state = {
+        isLoggedIn: null,
+        checkedSignIn: false,
+    };
+    notificationSubscription: any;
+
     componentDidMount() {
-        this._notificationSubscription = this._registerForPushNotifications();
+        this.getUser();
+        this.notificationSubscription = this.registerForPushNotifications();
     }
 
     componentWillUnmount() {
-        this._notificationSubscription && this._notificationSubscription.remove();
+        this.notificationSubscription && this.notificationSubscription.remove();
     }
+
+    getUser = async () => {
+        const isLoggedIn = await isSignedIn();
+        this.setState({
+            isLoggedIn,
+            checkedSignIn: true,
+        });
+    };
 
     render() {
-        return <MainModalNavigator />;
+        if (!this.state.checkedSignIn) {
+            return null;
+        }
+
+        const MainScreen = mainModalNavigator(this.state.isLoggedIn);
+        return <MainScreen />;
     }
 
-    _registerForPushNotifications() {
+    registerForPushNotifications() {
         // Send our push token over to our backend so we can receive notifications
         // You can comment the following line out if you want to stop receiving
         // a notification every time you open the app. Check out the source
@@ -65,7 +100,7 @@ export default class RootNavigator extends React.Component {
         registerForPushNotificationsAsync();
 
         // Watch for incoming notifications
-        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+        this.notificationSubscription = Notifications.addListener(this._handleNotification);
     }
 
     _handleNotification = ({ origin, data }) => {

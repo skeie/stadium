@@ -3,6 +3,7 @@
 import React from 'react';
 import MatchView from '../containers/MatchView';
 import MatchViewWithData from '../containers/MatchViewWithData';
+// $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 
 export default class MatchViewScreen extends React.Component<*, *> {
