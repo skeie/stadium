@@ -28,6 +28,8 @@ type Props = {
     username: string,
     password: string,
     onToggleSignup: () => void,
+    onButtonPressed: () => void,
+    error: string,
 };
 
 const LoginComponent = (props: Props) => {
@@ -40,28 +42,31 @@ const LoginComponent = (props: Props) => {
             <View flex={1} justifyContent="flex-start" alignItems="center">
                 {props.isSignup && (
                     <TextInput
-                        value={props.email}
+                        spellCheck={false}
+                        placeholder="Username"
+                        name="username"
+                        autoFocus
+                        value={props.username}
                         style={styles.textInput}
-                        placeholder="Email"
-                        na
                         onChangeText={text => {
-                            props.onInputChange('email', text);
+                            props.onInputChange('username', text);
                         }}
                     />
                 )}
                 <View padding={5} />
                 <TextInput
-                    placeholder="Username"
-                    name="username"
-                    value={props.username}
+                    spellCheck={false}
+                    value={props.email}
                     style={styles.textInput}
-                    autoFocus
+                    placeholder="Email"
+                    autoFocus={!props.isSignup}
                     onChangeText={text => {
-                        props.onInputChange('username', text);
+                        props.onInputChange('email', text);
                     }}
                 />
                 <View padding={5} />
                 <TextInput
+                    spellCheck={false}
                     secureTextEntry
                     onChangeText={text => {
                         props.onInputChange('password', text);
@@ -71,13 +76,16 @@ const LoginComponent = (props: Props) => {
                     placeholder="Password"
                 />
                 <View padding={15} />
-                <Button style={{ width: '50%' }} onPress={props.onLogin}>
+                <Button style={{ width: '50%' }} onPress={props.onButtonPressed}>
                     {props.isSignup ? 'Signup' : 'Login'}
                 </Button>
                 <View padding={5} />
                 <TouchableOpacity onPress={props.onToggleSignup}>
                     <Poppins>{props.isSignup ? signupText : loginText}</Poppins>
                 </TouchableOpacity>
+                <View padding={15}>
+                    <Poppins type="error">{props.error}</Poppins>
+                </View>
             </View>
         </View>
     );

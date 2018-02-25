@@ -11,7 +11,6 @@ import type { Match } from '../components/MatchView';
 import type { Props as Resultdata } from '../screens/LinksScreen';
 import MatchView from '../components/MatchView';
 import colors from '../constants/Colors';
-import { Connect, query } from 'urql';
 
 const FeedQuery = `
 query {
@@ -80,25 +79,15 @@ class HomeScreen extends Component<*, State> {
         const { matches = require('../testData/gridView').default } = this.props;
         // return <MatchViewContainer {...matches} isEdit={false} />;
         return (
-            <Connect
-                query={query(FeedQuery)}
-                children={({ loaded, fetching, refetch, data, error, addTodo }) => {
-                    return (
-                        <View flex={1}>
-                            <FlatList
-                                keyExtractor={this.keyExtractor}
-                                ItemSeparatorComponent={this.renderSeparator}
-                                data={matches}
-                                renderItem={item => <MatchView {...item.item} isEdit={false} />}
-                            />
-                            <FloatingAction
-                                actions={actions}
-                                onPressItem={this.props.onGoToPhoto}
-                            />
-                        </View>
-                    );
-                }}
-            />
+            <View flex={1}>
+                <FlatList
+                    keyExtractor={this.keyExtractor}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    data={matches}
+                    renderItem={item => <MatchView {...item.item} isEdit={false} />}
+                />
+                <FloatingAction actions={actions} onPressItem={this.props.onGoToPhoto} />
+            </View>
         );
     }
 }

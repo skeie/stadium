@@ -3,10 +3,14 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
-import { Provider, Client } from 'urql';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
 
-const client = new Client({
-    url: 'http://localhost:4000',
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
+
+const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
 });
 
 export default class App extends React.Component {
@@ -25,13 +29,13 @@ export default class App extends React.Component {
             );
         } else {
             return (
-                <Provider client={client}>
+                <ApolloProvider client={client}>
                     <View style={styles.container}>
                         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
                         {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
                         <RootNavigation />
                     </View>
-                </Provider>
+                </ApolloProvider>
             );
         }
     }

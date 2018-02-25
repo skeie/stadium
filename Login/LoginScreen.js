@@ -16,9 +16,13 @@ import { ImagePicker, Location, Permissions } from 'expo';
 import Login from './LoginContainer';
 
 export default class LoginScreen extends React.Component<*, *> {
+    static navigationOptions = {
+        header: null,
+    };
+
     handleLogin = () => {
         const { navigate } = this.props.navigation;
-        navigate('MainTabNavigator');
+        navigate('Main');
     };
 
     render() {

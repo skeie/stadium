@@ -9,6 +9,8 @@ type Props = any; // https://facebook.github.io/react-native/docs/textinput.html
 const Input = (props: Props) => {
     return (
         <TextInput
+            autoGrow
+            underlineColorAndroid="transparent"
             {...props}
             style={[styles.style, props.type && styles[props.type], props.style]}
         />

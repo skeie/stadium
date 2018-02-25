@@ -8,13 +8,14 @@ export const styles = StyleSheet.create({
     bold: { color: '#553555', fontFamily: 'poppins-bold' },
     header: { color: '#553555', fontSize: 20, fontFamily: 'poppins' },
     subHeader: { color: '#553555', fontSize: 18, fontFamily: 'poppins' },
+    error: { color: '#A846A0', fontFamily: 'poppins' },
 });
 
 type MonoProps = {
     style?: number | Object,
 };
 
-type Type = 'style' | 'header' | 'subHeader' | 'bold';
+type Type = 'style' | 'header' | 'subHeader' | 'bold' | 'error';
 
 type PoppinsProps = MonoProps & {
     children: React.Node,

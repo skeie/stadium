@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 
 export const USER_KEY = 'USER_KEY';
 
-export const onSignIn = () => AsyncStorage.setItem(USER_KEY, 'true');
+export const onSignIn = (token: string) => AsyncStorage.setItem(USER_KEY, token);
 
 export const onSignOut = () => AsyncStorage.removeItem(USER_KEY);
 
