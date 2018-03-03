@@ -6,9 +6,10 @@ import MatchViewUI from '../components/MatchView';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { post } from '../api/fetch';
-import { Connect, query, mutation } from 'urql';
 // $FlowFixMe
 import { NavigationActions } from 'react-navigation';
+// $FlowFixMe
+import { graphql, QueryProps } from 'react-apollo';
 import colors from '../constants/Colors';
 import { MatchMutation, MatchQuery } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
@@ -23,6 +24,7 @@ type Props = {
     uri: string,
     match: any,
     goBack: () => void,
+    matchMutation: QueryProps,
 };
 
 class MatchView extends Component<Props, *> {
@@ -46,38 +48,29 @@ class MatchView extends Component<Props, *> {
         const { uri, ...rest } = this.props;
 
         return (
-            <Connect
-                mutation={{
-                    addMatch: mutation(MatchMutation),
-                }}
-                children={({ loaded, fetching, refetch, data, error, addMatch }) => {
-                    return (
-                        <View flex={1}>
-                            <MatchViewUI {...this.props.match} />
-                            <View
-                                flexDirection="row"
-                                height="15%"
-                                backgroundColor={colors.primary}
-                                alignItems="center"
-                                justifyContent="space-around">
-                                <Button style={{ width: '40%' }}>Discard</Button>
+            <View flex={1}>
+                <MatchViewUI {...this.props.match} />
+                <View
+                    flexDirection="row"
+                    height="15%"
+                    backgroundColor={colors.primary}
+                    alignItems="center"
+                    justifyContent="space-around">
+                    <Button style={{ width: '40%' }}>Discard</Button>
 
-                                <Button
-                                    style={{ width: '40%' }}
-                                    onPress={async () => {
-                                        const match = omitDeep(this.props.match, '__typename');
-                                        await addMatch({ ...match, uri: this.image });
-                                        this.props.goBack();
-                                    }}>
-                                    Save
+                    <Button
+                        style={{ width: '40%' }}
+                        onPress={async () => {
+                            const match = omitDeep(this.props.match, '__typename');
+                            await this.props.matchMutation({ ...match, uri: this.image });
+                            this.props.goBack();
+                        }}>
+                        Save
                                 </Button>
-                            </View>
-                        </View>
-                    );
-                }}
-            />
+                </View>
+            </View>
+
         );
     }
 }
-
-export default MatchView;
+export default graphql(MatchMutation, { name: 'matchMutation' })(MatchView)

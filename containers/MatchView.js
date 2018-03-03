@@ -6,11 +6,11 @@ import MatchViewUI from '../components/MatchView';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { post } from '../api/fetch';
-import { Connect, query, mutation } from 'urql';
 import colors from '../constants/Colors';
 import { MatchMutation, MatchQuery } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
-import omitDeep from 'omit-deep-lodash';
+// $FlowFixMe
+import { graphql, compose, QueryProps } from 'react-apollo';
 
 import type { Match } from '../components/MatchView';
 
@@ -19,10 +19,54 @@ type Props = {
     lat: number,
     long: number,
     uri: string,
+    matchQuery: QueryProps,
+};
+
+type State = {
+    match?: Match,
 };
 
 class MatchView extends Component<Props, *> {
     image: string;
+
+    state = {
+        match: null,
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.matchQuery.loading && this.props.matchQuery.loading) {
+            const { match } = nextProps.matchQuery;
+            const props = { ...match, uri: this.image };
+            this.setState({
+                match: props,
+            });
+        }
+    }
+
+    changeMatch = (property: string) => (value: string) => {
+        this.setState(({ match }) => ({
+            match: {
+                ...match,
+                [property]: value,
+                goalScorers: this.updateGoalscorer(
+                    value,
+                    match.goalScorers,
+                    this.state.match ? this.state.match.homeTeam : '',
+                ),
+            },
+        }));
+    };
+
+    updateGoalscorer = (newHomeTeam, goalScorers, homeTeam) => {
+        return goalScorers.map(goalScorer => {
+            return {
+                ...goalScorer,
+                team: goalScorer.team === homeTeam ? newHomeTeam : goalScorer.team,
+            };
+        });
+    };
+
+    handleChangeHomeTeam = this.changeMatch('homeTeam');
 
     componentDidMount() {
         if (!__DEV__) {
@@ -39,55 +83,40 @@ class MatchView extends Component<Props, *> {
     };
 
     render() {
-        const { uri, ...rest } = this.props;
-
+        const { loading } = this.props.matchQuery;
+        if (loading && !this.state.match) {
+            return (
+                <View flex={1} justifyContent="center" alignItems="center">
+                    <Loading />
+                </View>
+            );
+        }
+        console.log('props', this.state);
         return (
-            <Connect
-                query={query(MatchQuery, rest)}
-                mutation={{
-                    addMatch: mutation(MatchMutation),
-                }}
-                children={({ loaded, fetching, refetch, data, error, addMatch }) => {
-                    if (data && data.match) {
-                        let match = {
-                            ...this.props,
-                            ...data.match,
-                        };
-                        match.uri =
-                            'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg';
-                        match = omitDeep(match, '__typename');
-                        return (
-                            <View flex={1}>
-                                <MatchViewUI {...match} />
-                                <View
-                                    flexDirection="row"
-                                    height="15%"
-                                    backgroundColor={colors.primary}
-                                    alignItems="center"
-                                    justifyContent="space-around">
-                                    <Button style={{ width: '40%' }}>Discard</Button>
+            <View flex={1}>
+                <MatchViewUI onChangeHomeTeam={this.handleChangeHomeTeam} {...this.state.match} />
+                <View
+                    flexDirection="row"
+                    height="15%"
+                    backgroundColor={colors.primary}
+                    alignItems="center"
+                    justifyContent="space-around">
+                    <Button style={{ width: '40%' }}>Discard</Button>
 
-                                    <Button
-                                        style={{ width: '40%' }}
-                                        onPress={() => {
-                                            addMatch(match);
-                                        }}>
-                                        Save
-                                    </Button>
-                                </View>
-                            </View>
-                        );
-                    } else {
-                        return (
-                            <View flex={1}>
-                                <Loading />
-                            </View>
-                        );
-                    }
-                }}
-            />
+                    <Button style={{ width: '40%' }} onPress={() => { }}>
+                        Save
+                    </Button>
+                </View>
+            </View>
         );
     }
 }
 
-export default MatchView;
+export default compose(
+    graphql(MatchMutation, {
+        name: 'matchMutation',
+    }),
+    graphql(MatchQuery, {
+        name: 'matchQuery',
+    }),
+)(MatchView);

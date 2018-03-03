@@ -1,4 +1,6 @@
-export const GetResultBytFootbalTeam = `
+import gql from 'graphql-tag';
+
+export const GetResultBytFootbalTeam = gql`
 query ($date: String!, $stadiumName: String!, $capacity: Int!, $name: String!) {
     matchBasedOnFootballTeam(date: $date, stadiumName: $stadiumName, capacity: $capacity, name: $name) {
       stadium {

@@ -8,9 +8,23 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import MatchView from '../screens/TestView';
+
+const getTestView = () => {
+    if (__DEV__) {
+        return {
+            Test: {
+                screen: MatchView,
+            }
+        }
+    } else {
+        return {}
+    }
+}
 
 export default TabNavigator(
     {
+        ...getTestView(),
         Home: {
             screen: HomeScreen,
         },

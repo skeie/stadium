@@ -1,14 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-
+// $FlowFixMe
+import { graphql, QueryProps } from 'react-apollo';
 import { get } from '../api/fetch';
-import { Connect, query, mutation } from 'urql';
 import type { Match } from '../components/MatchView';
 import { searchClubQL } from './SearchClubQL';
-import Query from '../query/Query';
 import { GetResultBytFootbalTeam } from './GetResultBytFootbalTeamGQL';
-
 import SearchClubUI from '../components/SearchClub';
 
 type Footballclub = {
@@ -30,6 +28,7 @@ type Props = {
     uri: string,
     date: string,
     onNext: Match => void,
+    getClub: QueryProps,
 };
 
 class SearchClub extends Component<Props, State> {
@@ -43,8 +42,13 @@ class SearchClub extends Component<Props, State> {
 
     onHandleTextInput = (text: string) => {
         clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-            this.setState({ text });
+        this.timeout = setTimeout(async () => {
+            const { data } = await this.props.getClub({
+                variables: {
+                    clubName: text
+                }
+            });
+            this.setState({ text, footballclubResult: data.getClub });
         }, 600);
     };
 
@@ -65,37 +69,27 @@ class SearchClub extends Component<Props, State> {
         this.props.onNext(matchBasedOnFootballTeam);
     };
 
-    getQuery = () => (this.state.text ? query(searchClubQL, { clubName: this.state.text }) : null);
+    handleToggleModal = () => {
+        this.setState(({ isVisible }) => ({
+            isVisible: !isVisible
+        }));
+    }
 
     render() {
-        if (this.state.data) {
-            return (
-                <Query
-                    onLoaded={this.handleClubSelect}
-                    queryData={{ query: GetResultBytFootbalTeam, data: this.state.data }}
-                />
-            );
-        }
         return (
-            <Connect
-                query={this.getQuery()}
-                children={({ loaded, fetching, refetch, data = {}, error }) => {
-                    let footballclubResult = [];
-                    if (data && data.getClub) footballclubResult = data.getClub;
-                    return (
-                        <SearchClubUI
-                            text={this.state.text}
-                            isVisible={this.state.isVisible}
-                            footballclubResult={footballclubResult}
-                            onHandleTextInput={this.onHandleTextInput}
-                            getMatchData={this.getMatchData}
-                            fetching={fetching}
-                        />
-                    );
-                }}
+            <SearchClubUI
+                text={this.state.text}
+                isVisible={this.state.isVisible}
+                footballclubResult={this.state.footballclubResult}
+                onHandleTextInput={this.onHandleTextInput}
+                getMatchData={this.getMatchData}
+                fetching={false}
+                toggleModal={this.handleToggleModal}
             />
-        );
+        )
     }
 }
 
-export default SearchClub;
+export default graphql(searchClubQL, {
+    name: 'getClub',
+})(SearchClub);

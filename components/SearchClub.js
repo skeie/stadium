@@ -30,6 +30,7 @@ type Props = {
     getMatchData: (club: Footballclub) => void,
     footballclubResult?: FootballclubResult,
     fetching?: boolean,
+    toggleModal: () => void,
 };
 
 const SearchClub = ({
@@ -38,9 +39,10 @@ const SearchClub = ({
     footballclubResult = [],
     getMatchData,
     fetching,
+    toggleModal,
 }: Props) => {
     return (
-        <Modal isVisible={isVisible}>
+        <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
             <View style={styles.modalContainer}>
                 <Poppins style={{ marginBottom: 20 }} type="header">
                     Oops, we could't not find anything with that picture :-(

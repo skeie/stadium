@@ -12,7 +12,6 @@ import {
     TextInput,
 } from 'react-native';
 // $FlowFixMe
-import { ImagePicker, Location, Permissions } from 'expo';
 import Login from './LoginContainer';
 
 export default class LoginScreen extends React.Component<*, *> {

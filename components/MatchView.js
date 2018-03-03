@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react';
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView, View, Image, Dimensions } from 'react-native';
 import colors from '../constants/Colors';
 import { Poppins } from './StyledText';
+import Top from './MatchView/Top';
+import ScoreView from './MatchView/ScoreView';
 
 const { height } = Dimensions.get('window');
 
@@ -15,14 +17,16 @@ export type Match = {
     awayTeam: string,
     goalsHomeTeam: number,
     goalsAwayTeam: number,
-    goalScorers: Array<{ name: string, minute: Array<string>, team: string }>,
+    goalScorers: Array<GoalScorer>,
     uri: string,
     date: string,
 };
 
-export type Props = Match;
+export type Props = Match & {
+    onChangeHomeTeam: string => void,
+};
 
-type GoalScorer = {
+export type GoalScorer = {
     name: string,
     minute: Array<string>,
     team: string,
@@ -37,62 +41,29 @@ const MatchView = (props: Props) => {
                     justifyContent: 'space-around',
                     backgroundColor: colors.primary,
                 }}>
-                <View
-                    flexDirection="column"
-                    padding={5}
-                    justifyContent="space-around"
-                    minHeight="10%">
-                    <View flexDirection="row">
-                        <Entypo name="location-pin" size={25} color="#553555" />
-                        <Poppins style={{ marginLeft: 2 }} type="header">
-                            {props.stadium.name}
-                        </Poppins>
-                    </View>
-                    <View marginLeft={27} marginRight={5} flex={1}>
-                        <View
-                            flexDirection="row"
-                            alignItems="center"
-                            justifyContent="space-between">
-                            <Poppins>Capacity: {props.stadium.capacity}</Poppins>
-                            <Poppins>{props.date}</Poppins>
-                        </View>
-                        <Poppins>Home team: {props.homeTeam}</Poppins>
-                    </View>
-                </View>
+                <Top
+                    name={props.stadium.name}
+                    capacity={props.stadium.capacity}
+                    date={props.date}
+                    homeTeam={props.homeTeam}
+                    onChangeHomeTeam={props.onChangeHomeTeam}
+                />
                 <Image
                     style={{ width: '100%', height: '50%' }}
                     source={{
                         uri: props.uri,
                     }}
                 />
-                <View width="100%" flexDirection="row" justifyContent="space-around" padding={10}>
-                    <TeamUI team={props.homeTeam} goalScorers={props.goalScorers} />
-                    <Poppins type="header">{props.goalsHomeTeam}</Poppins>
-                    <Poppins type="header">-</Poppins>
-                    <Poppins type="header" style={{ marginRight: 5 }}>
-                        {props.goalsAwayTeam}
-                    </Poppins>
-                    <TeamUI team={props.awayTeam} goalScorers={props.goalScorers} second />
-                </View>
+                <ScoreView
+                    homeTeam={props.homeTeam}
+                    goalScorers={props.goalScorers}
+                    awayTeam={props.awayTeam}
+                    goalsAwayTeam={props.goalsAwayTeam}
+                    goalsHomeTeam={props.goalsHomeTeam}
+                />
             </ScrollView>
         </View>
     );
 };
-
-const getGoalScorer = (goalScorers: Array<GoalScorer>, team: string) =>
-    goalScorers.filter(goalScorer => goalScorer.team === team);
-
-const TeamUI = ({ team, goalScorers }) => (
-    <View flex={1} alignItems="center">
-        <Poppins type="header">{team}</Poppins>
-        {getGoalScorer(goalScorers, team).map((goalscorer, index) => (
-            <View flexDirection="row" alignItems="center" key={index}>
-                <MaterialCommunityIcons name="soccer" size={18} color="#553555" />
-                <Poppins style={{ marginHorizontal: 3 }}>{goalscorer.name}</Poppins>
-                <Poppins>{`(${goalscorer.minute.join(', ')})`}</Poppins>
-            </View>
-        ))}
-    </View>
-);
 
 export default MatchView;
