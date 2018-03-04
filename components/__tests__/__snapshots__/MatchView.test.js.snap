@@ -1,0 +1,534 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchView renders correctly 1`] = `
+<View
+  backgroundColor="#ADF1D2"
+  flex={1}
+>
+  <RCTScrollView
+    contentContainerStyle={
+      Object {
+        "backgroundColor": "#ADF1D2",
+        "height": 889.3333333333334,
+        "justifyContent": "space-around",
+      }
+    }
+  >
+    <View>
+      <View
+        flexDirection="column"
+        justifyContent="space-around"
+        minHeight="10%"
+        padding={5}
+      >
+        <View
+          flexDirection="row"
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                },
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                  "fontSize": 20,
+                },
+                Object {
+                  "marginLeft": 2,
+                },
+              ]
+            }
+            type="header"
+          >
+            Camp Nou
+          </Text>
+        </View>
+        <View
+          marginLeft={27}
+          marginRight={5}
+        >
+          <View
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="space-between"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              Capacity: 
+              121749
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              2017/11/18
+            </Text>
+          </View>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "marginLeft": 5,
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          />
+          <View
+            marginRight={8}
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Home team: 
+            Barcelona
+          </Text>
+        </View>
+      </View>
+      <Image
+        source={
+          Object {
+            "uri": "https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg",
+          }
+        }
+        style={
+          Object {
+            "height": "50%",
+            "width": "100%",
+          }
+        }
+      />
+      <View
+        flexDirection="row"
+        justifyContent="space-around"
+        padding={10}
+        width="100%"
+      >
+        <View
+          alignItems="center"
+          flex={1}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                },
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                  "fontSize": 20,
+                },
+                undefined,
+              ]
+            }
+            type="header"
+          >
+            Barcelona
+          </Text>
+          <View
+            alignItems="center"
+            flexDirection="row"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  Object {
+                    "marginHorizontal": 3,
+                  },
+                ]
+              }
+            >
+              L. Suárez
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              (13)
+            </Text>
+          </View>
+          <View
+            alignItems="center"
+            flexDirection="row"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  Object {
+                    "marginHorizontal": 3,
+                  },
+                ]
+              }
+            >
+              L. Messi
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              (13)
+            </Text>
+          </View>
+          <View
+            alignItems="center"
+            flexDirection="row"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  Object {
+                    "marginHorizontal": 3,
+                  },
+                ]
+              }
+            >
+              G. Pique
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              (13)
+            </Text>
+          </View>
+          <View
+            alignItems="center"
+            flexDirection="row"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  Object {
+                    "marginHorizontal": 3,
+                  },
+                ]
+              }
+            >
+              Adriano
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              (13)
+            </Text>
+          </View>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+                "fontSize": 20,
+              },
+              undefined,
+            ]
+          }
+          type="header"
+        >
+          6
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+                "fontSize": 20,
+              },
+              undefined,
+            ]
+          }
+          type="header"
+        >
+          -
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+                "fontSize": 20,
+              },
+              Object {
+                "marginRight": 5,
+              },
+            ]
+          }
+          type="header"
+        >
+          1
+        </Text>
+        <View
+          alignItems="center"
+          flex={1}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                },
+                Object {
+                  "color": "#553555",
+                  "fontFamily": "poppins",
+                  "fontSize": 20,
+                },
+                undefined,
+              ]
+            }
+            type="header"
+          >
+            Roma
+          </Text>
+          <View
+            alignItems="center"
+            flexDirection="row"
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  Object {
+                    "marginHorizontal": 3,
+                  },
+                ]
+              }
+            >
+              E. Dzeko
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              (13)
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
