@@ -10,6 +10,11 @@ export default class GetPhotoScreen extends React.Component<*, *> {
         title: 'Choose Photo',
     };
 
+    componentDidMount() {
+        console.log('sapdap');
+
+    }
+
     handleBack = () => {
         const backAction = NavigationActions.back();
         this.props.navigation.dispatch(backAction);

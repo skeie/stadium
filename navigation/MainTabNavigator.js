@@ -11,7 +11,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import MatchView from '../screens/TestView';
 
 const getTestView = () => {
-    if (__DEV__) {
+    if (!__DEV__) {
         return {
             Test: {
                 screen: MatchView,
@@ -24,13 +24,13 @@ const getTestView = () => {
 
 export default TabNavigator(
     {
-        ...getTestView(),
         Home: {
             screen: HomeScreen,
         },
         Statistics: {
             screen: LinksScreen,
         },
+        ...getTestView(),
     },
     {
         navigationOptions: ({ navigation }) => ({

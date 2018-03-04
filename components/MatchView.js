@@ -24,6 +24,7 @@ export type Match = {
 
 export type Props = Match & {
     onChangeHomeTeam: string => void,
+    editable?: boolean,
 };
 
 export type GoalScorer = {
@@ -47,6 +48,7 @@ const MatchView = (props: Props) => {
                     date={props.date}
                     homeTeam={props.homeTeam}
                     onChangeHomeTeam={props.onChangeHomeTeam}
+                    editable={props.editable}
                 />
                 <Image
                     style={{ width: '100%', height: '50%' }}

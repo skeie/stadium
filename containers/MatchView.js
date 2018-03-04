@@ -11,7 +11,7 @@ import { MatchMutation, MatchQuery } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
 // $FlowFixMe
 import { graphql, compose, QueryProps } from 'react-apollo';
-
+import omitDeep from 'omit-deep-lodash';
 import type { Match } from '../components/MatchView';
 
 type Props = {
@@ -20,6 +20,8 @@ type Props = {
     long: number,
     uri: string,
     matchQuery: QueryProps,
+    matchMutation: *,
+    goBack: () => void,
 };
 
 type State = {
@@ -36,7 +38,7 @@ class MatchView extends Component<Props, *> {
     componentWillReceiveProps(nextProps) {
         if (!nextProps.matchQuery.loading && this.props.matchQuery.loading) {
             const { match } = nextProps.matchQuery;
-            const props = { ...match, uri: this.image };
+            const props = { ...match, uri: this.image, date: this.props.date };
             this.setState({
                 match: props,
             });
@@ -82,6 +84,21 @@ class MatchView extends Component<Props, *> {
         this.image = image.url;
     };
 
+    handleSave = async () => {
+        const match = omitDeep(this.state.match, '__typename');
+        try {
+            await this.props.matchMutation({
+                variables: {
+                    ...match,
+                }
+            })
+            this.props.goBack();
+        } catch (error) {
+            console.log('something bad happen, try again');
+        }
+
+    }
+
     render() {
         const { loading } = this.props.matchQuery;
         if (loading && !this.state.match) {
@@ -91,10 +108,9 @@ class MatchView extends Component<Props, *> {
                 </View>
             );
         }
-        console.log('props', this.state);
         return (
             <View flex={1}>
-                <MatchViewUI onChangeHomeTeam={this.handleChangeHomeTeam} {...this.state.match} />
+                <MatchViewUI editable onChangeHomeTeam={this.handleChangeHomeTeam} {...this.state.match} />
                 <View
                     flexDirection="row"
                     height="15%"
@@ -102,8 +118,7 @@ class MatchView extends Component<Props, *> {
                     alignItems="center"
                     justifyContent="space-around">
                     <Button style={{ width: '40%' }}>Discard</Button>
-
-                    <Button style={{ width: '40%' }} onPress={() => { }}>
+                    <Button style={{ width: '40%' }} onPress={this.handleSave}>
                         Save
                     </Button>
                 </View>

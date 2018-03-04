@@ -13,6 +13,7 @@ type Props = {
     homeTeam: string,
     date: string,
     onChangeHomeTeam: string => void,
+    editable?: boolean,
 };
 
 const styles = StyleSheet.create({
@@ -49,29 +50,32 @@ class Top extends Component<Props, *> {
                         <Poppins>Capacity: {this.props.capacity}</Poppins>
                         <Poppins>{this.props.date}</Poppins>
                     </View>
+                    {!this.props.editable && <Poppins>Home team: {this.props.homeTeam}</Poppins>}
                 </View>
-                <TouchableOpacity
-                    onPress={this.changeHome}
-                    style={{
-                        marginLeft: 5,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}>
-                    <MaterialIcons size={15} name={this.state.isHomeEdit ? 'save' : 'edit'} />
-                    <View marginRight={8} />
-                    {this.state.isHomeEdit ? (
-                        <TextInput
-                            spellCheck={false}
-                            placeholder="hometeam"
-                            autoFocus
-                            value={this.props.homeTeam}
-                            style={styles.textInput}
-                            onChangeText={this.props.onChangeHomeTeam}
-                        />
-                    ) : (
-                            <Poppins>Home team: {this.props.homeTeam}</Poppins>
-                        )}
-                </TouchableOpacity>
+                {this.props.editable &&
+                    <TouchableOpacity
+                        onPress={this.changeHome}
+                        style={{
+                            marginLeft: 5,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}>
+                        <MaterialIcons size={15} name={this.state.isHomeEdit ? 'save' : 'edit'} />
+                        <View marginRight={8} />
+                        {this.state.isHomeEdit ? (
+                            <TextInput
+                                spellCheck={false}
+                                placeholder="hometeam"
+                                autoFocus
+                                value={this.props.homeTeam}
+                                style={styles.textInput}
+                                onChangeText={this.props.onChangeHomeTeam}
+                            />
+                        ) : (
+                                <Poppins>Home team: {this.props.homeTeam}</Poppins>
+                            )}
+                    </TouchableOpacity>
+                }
             </View>
         );
     }

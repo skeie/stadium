@@ -29,6 +29,7 @@ type Props = {
     date: string,
     onNext: Match => void,
     getClub: QueryProps,
+    onGoBack: () => void,
 };
 
 class SearchClub extends Component<Props, State> {
@@ -72,7 +73,7 @@ class SearchClub extends Component<Props, State> {
     handleToggleModal = () => {
         this.setState(({ isVisible }) => ({
             isVisible: !isVisible
-        }));
+        }), this.props.onGoBack);
     }
 
     render() {

@@ -56,7 +56,9 @@ class GetPhoto extends Component<*, State> {
                     long: result.exif.GPSLongitude,
                     date: this.date,
                 };
+
                 this.props.navigation.navigate('MatchView', { ...location, uri: this.uri });
+
             }
         } else {
             this.props.onBack();

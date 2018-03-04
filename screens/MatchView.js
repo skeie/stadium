@@ -14,9 +14,15 @@ export default class MatchViewScreen extends React.Component<*, *> {
     goBack = () => {
         const resetAction = NavigationActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'MainScreen' })],
+            key: null,
+            actions: [
+                NavigationActions.navigate({ routeName: 'RootStackNavigator' })
+            ]
         });
-    };
+        this.props.navigation.dispatch(resetAction);
+    }
+
+
 
     render() {
         if (this.props.navigation.state.params.match) {

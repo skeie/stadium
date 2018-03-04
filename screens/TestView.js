@@ -1,6 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import MatchView from '../containers/SearchClub';
+import MatchView from '../containers/MatchView';
+// $FlowFixMe
+import { NavigationActions } from 'react-navigation';
 const props = {
     lat: 51.474821666666664,
     long: 0.22192833333333334,
@@ -14,12 +16,23 @@ export default class SettingsScreen extends React.Component {
         header: null,
     };
 
+    sap = () => {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            key: null,
+            actions: [
+                NavigationActions.navigate({ routeName: 'RootStackNavigator' })
+            ]
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
+
     render() {
         /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config */
         return (
             <View paddingTop={40} flex={1}>
-                <MatchView {...props} />
+                <MatchView {...props} goBack={this.sap} />
             </View>
         );
     }
