@@ -10,6 +10,10 @@ import EmptyHomeView from '../components/EmptyHomeView';
 import type { Match } from '../components/MatchView';
 import MatchView from '../components/MatchView';
 import colors from '../constants/Colors';
+// $FlowFixMe
+import { graphql, QueryProps } from 'react-apollo';
+import { FeedQuery } from './GridGQL'
+import Loading from '../components/Loading'
 
 type Resultdata = {
     stadium: { capacity: number, name: string },
@@ -27,35 +31,6 @@ type GoalScorer = {
     minute: Array<string>,
     team: string,
 };
-
-const FeedQuery = `
-query {
-    feed {
-        id
-        date,
-        startTime,
-        homeTeam,
-        awayTeam,
-        uri,
-        goalsHomeTeam,
-        goalsAwayTeam,
-        created,
-        updated,
-            stadium {
-              name,
-          capacity,
-          footballTeamName,
-          updated,
-        },
-        goalScorers {
-          name,
-          minute,
-          team
-          updated,
-        }
-      }
-}
-`;
 
 type Item = {
     item: Match,
@@ -76,6 +51,11 @@ type State = {
     showErrorModal: boolean,
 };
 
+type Props = {
+    feed: QueryProps,
+    onGoToPhoto: () => void,
+}
+
 const actions = [
     {
         text: 'Choose Image',
@@ -84,7 +64,7 @@ const actions = [
         icon: <MaterialIcons name="photo" size={18} color="white" />,
     },
 ];
-class HomeScreen extends Component<*, State> {
+class HomeScreen extends Component<Props, State> {
     state = { resultdata: null, text: '', showErrorModal: false };
 
     keyExtractor = (item: Match, index: number) => `${item.uri}-${item.date}-${index}`;
@@ -92,14 +72,23 @@ class HomeScreen extends Component<*, State> {
     renderSeparator = () => <View height={5} backgroundColor={colors.primaryText} />;
 
     render() {
-        const { matches = require('../testData/gridView').default } = this.props;
+        console.log('sapdpa', this.props);
+
+        const { feed } = this.props;
+        if (feed.loading) {
+            return (
+                <View flex={1} justifyContent="center" alignItems="center">
+                    <Loading />
+                </View>
+            )
+        }
         // return <MatchViewContainer {...matches} isEdit={false} />;
         return (
             <View flex={1}>
                 <FlatList
                     keyExtractor={this.keyExtractor}
                     ItemSeparatorComponent={this.renderSeparator}
-                    data={matches}
+                    data={feed.feed}
                     renderItem={item => <MatchView {...item.item} isEdit={false} />}
                 />
                 <FloatingAction actions={actions} onPressItem={this.props.onGoToPhoto} />
@@ -108,4 +97,4 @@ class HomeScreen extends Component<*, State> {
     }
 }
 
-export default HomeScreen;
+export default graphql(FeedQuery, { name: 'feed' })(HomeScreen);
