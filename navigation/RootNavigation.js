@@ -10,11 +10,11 @@ import { StackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
-import Photo from '../screens/GetPhoto';
-import MatchView from '../screens/MatchView';
+import Photo from '../Photo/GetPhotoScreen';
+import MatchView from '../MatchView/MatchViewScreen';
 import Login from '../Login/LoginScreen';
 
-import SearchClubModal from '../screens/Modals/SearchClub';
+import SearchClubModal from '../SearchClub/SearchClubModal';
 import { isSignedIn } from '../util/auth';
 import Loading from '../components/Loading';
 

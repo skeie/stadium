@@ -7,7 +7,7 @@ import { get } from '../api/fetch';
 import type { Match } from '../components/MatchView';
 import { searchClubQL } from './SearchClubQL';
 import { GetResultBytFootbalTeam } from './GetResultBytFootbalTeamGQL';
-import SearchClubUI from '../components/SearchClub';
+import SearchClubUI from './SearchClubComponent';
 
 type Footballclub = {
     capacity: string,

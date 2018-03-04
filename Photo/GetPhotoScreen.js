@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import GetPhoto from '../containers/GetPhoto';
+import GetPhoto from './GetPhotoContainer';
 // $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 
@@ -9,11 +9,6 @@ export default class GetPhotoScreen extends React.Component<*, *> {
     static navigationOptions = {
         title: 'Choose Photo',
     };
-
-    componentDidMount() {
-        console.log('sapdap');
-
-    }
 
     handleBack = () => {
         const backAction = NavigationActions.back();

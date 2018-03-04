@@ -5,9 +5,8 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../GridView/GridScreen';
+// import SettingsScreen from '../screens/SettingsScreen';
 import MatchView from '../screens/TestView';
 
 const getTestView = () => {
@@ -27,9 +26,9 @@ export default TabNavigator(
         Home: {
             screen: HomeScreen,
         },
-        Statistics: {
-            screen: LinksScreen,
-        },
+        // Statistics: {
+        //     screen: LinksScreen,
+        // },
         ...getTestView(),
     },
     {

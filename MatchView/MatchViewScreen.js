@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react';
-import MatchView from '../containers/MatchView';
-import MatchViewWithData from '../containers/MatchViewWithData';
+import MatchView from './MatchViewContainer';
+import MatchViewWithData from './MatchViewWithDataContainer';
 // $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 

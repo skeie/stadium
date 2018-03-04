@@ -2,9 +2,9 @@
 import React from 'react';
 import { TextInput, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
-import { MonoText, Poppins } from './StyledText';
+import { MonoText, Poppins } from '../components/StyledText';
 import colors from '../constants/Colors';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 const styles = StyleSheet.create({
     modalContainer: {

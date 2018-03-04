@@ -8,9 +8,25 @@ import EmptyView from '../components/EmptyHomeView';
 import { FloatingAction } from 'react-native-floating-action';
 import EmptyHomeView from '../components/EmptyHomeView';
 import type { Match } from '../components/MatchView';
-import type { Props as Resultdata } from '../screens/LinksScreen';
 import MatchView from '../components/MatchView';
 import colors from '../constants/Colors';
+
+type Resultdata = {
+    stadium: { capacity: number, name: string },
+    startTime: string,
+    homeTeam: string,
+    awayTeam: string,
+    result: { goalsHomeTeam: number, goalsAwayTeam: number },
+    goalScorers: Array<{ name: string, minute: Array<string>, team: string }>,
+    uri: string,
+    date: string,
+}
+
+type GoalScorer = {
+    name: string,
+    minute: Array<string>,
+    team: string,
+};
 
 const FeedQuery = `
 query {

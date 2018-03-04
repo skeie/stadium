@@ -18,13 +18,11 @@ import { ImagePicker, Location, Permissions } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MonoText, Poppins } from '../components/StyledText';
 import { get } from '../api/fetch';
-import LinksScreen from './LinksScreen';
 import colors from '../constants/Colors';
 import Loading from '../components/Loading';
-import type { Props as Resultdata } from './LinksScreen';
-import HomeScreenContainer from '../containers/HomeScreen';
+import GridContainer from './GridContainer';
 
-export default class HomeScreen extends React.Component<*, *> {
+export default class GridScreen extends React.Component<*, *> {
     static navigationOptions = {
         header: null,
     };
@@ -35,6 +33,6 @@ export default class HomeScreen extends React.Component<*, *> {
     };
 
     render() {
-        return <HomeScreenContainer onGoToPhoto={this.onHandleGoToPhoto} {...this.props} />;
+        return <GridContainer onGoToPhoto={this.onHandleGoToPhoto} {...this.props} />;
     }
 }

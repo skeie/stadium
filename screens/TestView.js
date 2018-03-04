@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import MatchView from '../containers/MatchView';
+import MatchView from '../MatchView/MatchViewContainer';
 // $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 const props = {

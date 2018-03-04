@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react';
-import SearchClub from '../../containers/SearchClub';
+import SearchClub from './SearchClubContainer';
 // $FlowFixMe
 import { NavigationActions } from 'react-navigation';
 
-import type { Match } from '../../components/MatchView';
+import type { Match } from '../components/MatchView';
 
 export default class GetPhotoScreen extends React.Component<*, *> {
     handleNext = (resultData: Match) => {
