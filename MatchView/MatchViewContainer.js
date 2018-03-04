@@ -13,6 +13,7 @@ import { uploadPhoto } from '../api/fetch';
 import { graphql, compose, QueryProps } from 'react-apollo';
 import omitDeep from 'omit-deep-lodash';
 import type { Match } from '../components/MatchView';
+import { updateGoalscorer } from './matchViewUtil';
 
 type Props = {
     date: string,
@@ -35,7 +36,7 @@ class MatchView extends Component<Props, *> {
         match: null,
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Props) {
         if (!nextProps.matchQuery.loading && this.props.matchQuery.loading) {
             const { match } = nextProps.matchQuery;
             const props = { ...match, uri: this.image, date: this.props.date };
@@ -50,22 +51,13 @@ class MatchView extends Component<Props, *> {
             match: {
                 ...match,
                 [property]: value,
-                goalScorers: this.updateGoalscorer(
+                goalScorers: updateGoalscorer(
                     value,
                     match.goalScorers,
                     this.state.match ? this.state.match.homeTeam : '',
                 ),
             },
         }));
-    };
-
-    updateGoalscorer = (newHomeTeam, goalScorers, homeTeam) => {
-        return goalScorers.map(goalScorer => {
-            return {
-                ...goalScorer,
-                team: goalScorer.team === homeTeam ? newHomeTeam : goalScorer.team,
-            };
-        });
     };
 
     handleChangeHomeTeam = this.changeMatch('homeTeam');
