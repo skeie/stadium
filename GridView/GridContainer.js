@@ -3,8 +3,6 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
-import EmptyView from '../components/EmptyHomeView';
 import { FloatingAction } from 'react-native-floating-action';
 import EmptyHomeView from '../components/EmptyHomeView';
 import type { Match } from '../components/MatchView';
@@ -72,8 +70,6 @@ class HomeScreen extends Component<Props, State> {
     renderSeparator = () => <View height={5} backgroundColor={colors.primaryText} />;
 
     render() {
-        console.log('sapdpa', this.props);
-
         const { feed } = this.props;
         if (feed.loading) {
             return (
