@@ -11,66 +11,68 @@ import { NavigationActions } from 'react-navigation';
 // $FlowFixMe
 import { graphql, QueryProps } from 'react-apollo';
 import colors from '../constants/Colors';
-import { MatchMutation, MatchQuery } from './MatchViewQL';
+import { MatchMutation } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
 import omitDeep from 'omit-deep-lodash';
 
 import type { Match } from '../components/MatchView';
 
 type Props = {
-    date: string,
-    lat: number,
-    long: number,
-    uri: string,
-    match: any,
-    goBack: () => void,
-    matchMutation: QueryProps,
+  lat: number,
+  long: number,
+  uri: string,
+  match: any,
+  goBack: () => void,
+  matchMutation: QueryProps,
 };
 
-class MatchView extends Component<Props, *> {
-    image: string;
+class MatchViewWithData extends Component<Props, *> {
+  image: string;
 
-    componentDidMount() {
-        if (!__DEV__) {
-            this.uploadPhoto();
-        } else {
-            this.image =
-                'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg';
-        }
+  componentDidMount() {
+    if (!__DEV__) {
+      this.uploadPhoto();
+    } else {
+      this.image = 'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg';
     }
+  }
 
-    uploadPhoto = async () => {
-        const image = await uploadPhoto(this.props.uri);
-        this.image = image.url;
-    };
+  uploadPhoto = async () => {
+    const image = await uploadPhoto(this.props.uri);
+    this.image = image.url;
+  };
 
-    render() {
-        const { uri, ...rest } = this.props;
+  render() {
+    const { uri, ...rest } = this.props;
+    console.log('sapdap 1 1');
+    return (
+      <View flex={1}>
+        <MatchViewUI {...this.props.match} />
+        <View
+          flexDirection="row"
+          height="15%"
+          backgroundColor={colors.primary}
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <Button style={{ width: '40%' }}>Discard</Button>
 
-        return (
-            <View flex={1}>
-                <MatchViewUI {...this.props.match} />
-                <View
-                    flexDirection="row"
-                    height="15%"
-                    backgroundColor={colors.primary}
-                    alignItems="center"
-                    justifyContent="space-around">
-                    <Button style={{ width: '40%' }}>Discard</Button>
-
-                    <Button
-                        style={{ width: '40%' }}
-                        onPress={async () => {
-                            const match = omitDeep(this.props.match, '__typename');
-                            await this.props.matchMutation({ ...match, uri: this.image });
-                            this.props.goBack();
-                        }}>
-                        Save
-                                </Button>
-                </View>
-            </View>
-
-        );
-    }
+          <Button
+            style={{ width: '40%' }}
+            onPress={async () => {
+              const match = omitDeep(this.props.match, '__typename');
+              const lol = await this.props.matchMutation({
+                variables: { ...match, uri: this.image },
+              });
+              debugger;
+              this.props.goBack();
+            }}
+          >
+            Save
+          </Button>
+        </View>
+      </View>
+    );
+  }
 }
-export default graphql(MatchMutation, { name: 'matchMutation' })(MatchView)
+export default graphql(MatchMutation, { name: 'matchMutation' })(MatchViewWithData);

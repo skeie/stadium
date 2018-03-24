@@ -11,61 +11,62 @@ import ScoreView from './MatchView/ScoreView';
 const { height } = Dimensions.get('window');
 
 export type Match = {
-    stadium: { capacity: number, name: string },
-    startTime: string,
-    homeTeam: string,
-    awayTeam: string,
-    goalsHomeTeam: number,
-    goalsAwayTeam: number,
-    goalScorers: Array<GoalScorer>,
-    uri: string,
-    date: string,
+  stadium: { capacity: number, name: string },
+  startTime: string,
+  homeTeam: string,
+  awayTeam: string,
+  goalsHomeTeam: number,
+  goalsAwayTeam: number,
+  goalScorers: Array<GoalScorer>,
+  uri: string,
+  date: string,
 };
 
 export type Props = Match & {
-    onChangeHomeTeam: string => void,
-    editable?: boolean,
+  onChangeHomeTeam: string => void,
+  editable?: boolean,
 };
 
 export type GoalScorer = {
-    name: string,
-    minute: Array<string>,
-    team: string,
+  name: string,
+  minute: Array<string>,
+  team: string,
 };
 
 const MatchView = (props: Props) => {
-    return (
-        <View flex={1} backgroundColor={colors.primary}>
-            <ScrollView
-                contentContainerStyle={{
-                    height: height / 1.5,
-                    justifyContent: 'space-around',
-                    backgroundColor: colors.primary,
-                }}>
-                <Top
-                    name={props.stadium.name}
-                    capacity={props.stadium.capacity}
-                    date={props.date}
-                    homeTeam={props.homeTeam}
-                    onChangeHomeTeam={props.onChangeHomeTeam}
-                    editable={props.editable}
-                />
-                <Image
-                    style={{ width: '100%', height: '50%' }}
-                    source={{
-                        uri: props.uri,
-                    }}
-                />
-                <ScoreView
-                    homeTeam={props.homeTeam}
-                    goalScorers={props.goalScorers}
-                    awayTeam={props.awayTeam}
-                    goalsAwayTeam={props.goalsAwayTeam}
-                    goalsHomeTeam={props.goalsHomeTeam}
-                />
-            </ScrollView>
-        </View>
-    );
+  return (
+    <View flex={1} backgroundColor={colors.primary}>
+      <ScrollView
+        contentContainerStyle={{
+          height: height / 1.5,
+          justifyContent: 'space-around',
+          backgroundColor: colors.primary,
+        }}
+      >
+        <Top
+          name={props.stadium.name}
+          capacity={props.stadium.capacity}
+          date={props.date}
+          homeTeam={props.homeTeam}
+          onChangeHomeTeam={props.onChangeHomeTeam}
+          editable={props.editable}
+        />
+        <Image
+          style={{ width: '100%', height: '50%' }}
+          source={{
+            uri: props.uri,
+          }}
+        />
+        <ScoreView
+          homeTeam={props.homeTeam}
+          goalScorers={props.goalScorers}
+          awayTeam={props.awayTeam}
+          goalsAwayTeam={props.goalsAwayTeam}
+          goalsHomeTeam={props.goalsHomeTeam}
+        />
+      </ScrollView>
+    </View>
+  );
 };
 
 export default MatchView;
