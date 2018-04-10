@@ -1,217 +1,236 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login component render login layout 1`] = `
-<View
-  flex={1}
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={0}
   style={
     Object {
+      "alignItems": "center",
       "backgroundColor": "#ADF1D2",
+      "flex": 1,
+      "paddingTop": 20,
     }
   }
 >
-  <View
-    alignItems="center"
-    flex={1}
-    justifyContent="center"
-  >
-    <Icon
-      allowFontScaling={false}
-      color="#553555"
-      name="stadium"
-      size={64}
-    />
-    <Poppins
-      type="header"
-    >
-      Welcome to Stadiumz
-    </Poppins>
-  </View>
-  <View
-    alignItems="center"
-    flex={1}
-    justifyContent="flex-start"
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "flexGrow": 1,
+        "justifyContent": "center",
+      }
+    }
+    keyboardShouldPersistTaps="handled"
+    style={
+      Object {
+        "backgroundColor": "#ADF1D2",
+      }
+    }
   >
     <View
-      padding={5}
-    />
-    <Input
-      autoFocus={true}
-      onChangeText={[Function]}
-      placeholder="Email"
-      spellCheck={false}
-      style={
-        Object {
-          "borderColor": "#553555",
-          "borderRadius": 10,
-          "borderWidth": 1,
-          "padding": 10,
-          "width": "50%",
-        }
-      }
-    />
-    <View
-      padding={5}
-    />
-    <Input
-      onChangeText={[Function]}
-      placeholder="Password"
-      secureTextEntry={true}
-      spellCheck={false}
-      style={
-        Object {
-          "borderColor": "#553555",
-          "borderRadius": 10,
-          "borderWidth": 1,
-          "padding": 10,
-          "width": "50%",
-        }
-      }
-    />
-    <View
-      padding={15}
-    />
-    <Button
-      style={
-        Object {
-          "width": "50%",
-        }
-      }
+      alignItems="center"
+      flex={1}
+      justifyContent="center"
     >
-      Login
-    </Button>
-    <View
-      padding={5}
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
-      <Poppins>
-        Don't have an account? Click here to Signup!
-      </Poppins>
-    </TouchableOpacity>
-    <View
-      padding={15}
-    >
-      <Poppins
-        type="error"
+      <Icon
+        allowFontScaling={false}
+        color="#553555"
+        name="stadium"
+        size={64}
       />
+      <Poppins
+        type="header"
+      >
+        Welcome to Stadiumz
+      </Poppins>
     </View>
-  </View>
-</View>
+    <View
+      alignItems="center"
+      flex={1}
+      justifyContent="center"
+    >
+      <View
+        padding={5}
+      />
+      <Input
+        autoFocus={true}
+        onChangeText={[Function]}
+        placeholder="Email"
+        style={
+          Object {
+            "borderColor": "#553555",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 10,
+            "width": "50%",
+          }
+        }
+      />
+      <View
+        padding={5}
+      />
+      <Input
+        onChangeText={[Function]}
+        placeholder="Password"
+        secureTextEntry={true}
+        style={
+          Object {
+            "borderColor": "#553555",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 10,
+            "width": "50%",
+          }
+        }
+      />
+      <View
+        padding={15}
+      />
+      <Button
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+      >
+        Login
+      </Button>
+      <View
+        padding={5}
+      />
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Poppins>
+          Don't have an account? Click here to Signup!
+        </Poppins>
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+</KeyboardAvoidingView>
 `;
 
 exports[`Login component render signup layout 1`] = `
-<View
-  flex={1}
+<KeyboardAvoidingView
+  behavior="padding"
+  keyboardVerticalOffset={0}
   style={
     Object {
+      "alignItems": "center",
       "backgroundColor": "#ADF1D2",
+      "flex": 1,
+      "paddingTop": 20,
     }
   }
 >
-  <View
-    alignItems="center"
-    flex={1}
-    justifyContent="center"
+  <ScrollViewMock
+    contentContainerStyle={
+      Object {
+        "flexGrow": 1,
+        "justifyContent": "center",
+      }
+    }
+    keyboardShouldPersistTaps="handled"
+    style={
+      Object {
+        "backgroundColor": "#ADF1D2",
+      }
+    }
   >
-    <Icon
-      allowFontScaling={false}
-      color="#553555"
-      name="stadium"
-      size={64}
-    />
-    <Poppins
-      type="header"
+    <View
+      alignItems="center"
+      flex={1}
+      justifyContent="center"
     >
-      Welcome to Stadiumz
-    </Poppins>
-  </View>
-  <View
-    alignItems="center"
-    flex={1}
-    justifyContent="flex-start"
-  >
-    <Input
-      autoFocus={true}
-      name="username"
-      onChangeText={[Function]}
-      placeholder="Username"
-      spellCheck={false}
-      style={
-        Object {
-          "borderColor": "#553555",
-          "borderRadius": 10,
-          "borderWidth": 1,
-          "padding": 10,
-          "width": "50%",
-        }
-      }
-    />
-    <View
-      padding={5}
-    />
-    <Input
-      autoFocus={false}
-      onChangeText={[Function]}
-      placeholder="Email"
-      spellCheck={false}
-      style={
-        Object {
-          "borderColor": "#553555",
-          "borderRadius": 10,
-          "borderWidth": 1,
-          "padding": 10,
-          "width": "50%",
-        }
-      }
-    />
-    <View
-      padding={5}
-    />
-    <Input
-      onChangeText={[Function]}
-      placeholder="Password"
-      secureTextEntry={true}
-      spellCheck={false}
-      style={
-        Object {
-          "borderColor": "#553555",
-          "borderRadius": 10,
-          "borderWidth": 1,
-          "padding": 10,
-          "width": "50%",
-        }
-      }
-    />
-    <View
-      padding={15}
-    />
-    <Button
-      style={
-        Object {
-          "width": "50%",
-        }
-      }
-    >
-      Signup
-    </Button>
-    <View
-      padding={5}
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-    >
-      <Poppins>
-        Already have an account? Click here to login
-      </Poppins>
-    </TouchableOpacity>
-    <View
-      padding={15}
-    >
-      <Poppins
-        type="error"
+      <Icon
+        allowFontScaling={false}
+        color="#553555"
+        name="stadium"
+        size={64}
       />
+      <Poppins
+        type="header"
+      >
+        Welcome to Stadiumz
+      </Poppins>
     </View>
-  </View>
-</View>
+    <View
+      alignItems="center"
+      flex={1}
+      justifyContent="center"
+    >
+      <Input
+        autoFocus={true}
+        name="username"
+        onChangeText={[Function]}
+        placeholder="Username"
+        style={
+          Object {
+            "borderColor": "#553555",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 10,
+            "width": "50%",
+          }
+        }
+      />
+      <View
+        padding={5}
+      />
+      <Input
+        autoFocus={false}
+        onChangeText={[Function]}
+        placeholder="Email"
+        style={
+          Object {
+            "borderColor": "#553555",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 10,
+            "width": "50%",
+          }
+        }
+      />
+      <View
+        padding={5}
+      />
+      <Input
+        onChangeText={[Function]}
+        placeholder="Password"
+        secureTextEntry={true}
+        style={
+          Object {
+            "borderColor": "#553555",
+            "borderRadius": 10,
+            "borderWidth": 1,
+            "padding": 10,
+            "width": "50%",
+          }
+        }
+      />
+      <View
+        padding={15}
+      />
+      <Button
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+      >
+        Signup
+      </Button>
+      <View
+        padding={5}
+      />
+      <TouchableOpacity
+        activeOpacity={0.2}
+      >
+        <Poppins>
+          Already have an account? Click here to login
+        </Poppins>
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+</KeyboardAvoidingView>
 `;

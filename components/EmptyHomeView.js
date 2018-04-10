@@ -25,8 +25,8 @@ const Homescreen = () => {
         • An app that helps you keep track of the football matches you have attended
       </Poppins>
       <Poppins>
-        • Press on the plus icon in the down right corner to start adding photos of football
-        stadiums.
+        • Press on the plus icon in the down right corner to start and select a photo of football
+        stadiums and see the magic happen
       </Poppins>
     </View>
   );

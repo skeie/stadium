@@ -56,7 +56,6 @@ const LoginComponent = (props: Props) => {
         <View flex={1} justifyContent="center" alignItems="center">
           {props.isSignup && (
             <TextInput
-              placeholderTextColor={colors.placeholder}
               placeholder="Username"
               name="username"
               autoFocus
@@ -69,7 +68,6 @@ const LoginComponent = (props: Props) => {
           )}
           <View padding={5} />
           <TextInput
-            placeholderTextColor={colors.placeholder}
             value={props.email}
             style={styles.textInput}
             placeholder="Email"
@@ -80,7 +78,6 @@ const LoginComponent = (props: Props) => {
           />
           <View padding={5} />
           <TextInput
-            placeholderTextColor={colors.placeholder}
             secureTextEntry
             onChangeText={text => {
               props.onInputChange('password', text);

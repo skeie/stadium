@@ -8,6 +8,7 @@ import Login from './LoginComponents';
 // $FlowFixMe
 import { graphql, compose } from 'react-apollo';
 import { onSignIn } from '../util/auth';
+import tracking from '../util/tracking';
 type State = {
   username: string,
   password: string,
@@ -26,6 +27,10 @@ class LoginContainer extends Component<*, State> {
     error: '',
     loading: false,
   };
+
+  componentDidMount() {
+    tracking.screenView('Login');
+  }
 
   handleInputChange = (name: string, value: string) => {
     this.setState({

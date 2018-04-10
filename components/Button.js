@@ -13,6 +13,7 @@ type Props = {
   style: any,
   onPress: () => void,
   children: string,
+  loading?: boolean,
 };
 
 const Button = ({ style, onPress, children, loading = false }) => {

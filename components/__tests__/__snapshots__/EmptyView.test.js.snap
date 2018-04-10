@@ -7,6 +7,7 @@ exports[`EmptyHomeView renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#ADF1D2",
       "flex": 1,
+      "height": "100%",
       "justifyContent": "center",
       "padding": 20,
     }
@@ -72,7 +73,7 @@ exports[`EmptyHomeView renders correctly 1`] = `
       ]
     }
   >
-    • Press on the plus icon in the down right corner to starting adding photos of football stadiums.
+    • Press on the plus icon in the down right corner to start and select a photo of football stadiums and see the magic happen
   </Text>
 </View>
 `;

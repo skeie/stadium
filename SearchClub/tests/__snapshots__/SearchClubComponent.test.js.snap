@@ -88,7 +88,7 @@ exports[`Button renders correctly 1`] = `
         }
         type="header"
       >
-        Oops, we could't not find anything with that picture :-(
+        Oops, there was a problem with that image
       </Text>
       <Text
         accessible={true}
@@ -107,14 +107,14 @@ exports[`Button renders correctly 1`] = `
           ]
         }
       >
-        Please search and then select the home team in the picture you choose.
+        Please search and then select the home team in the image.
       </Text>
       <TextInput
         allowFontScaling={true}
         autoFocus={true}
         height={50}
         onChangeText={[Function]}
-        placeholder="Football stadium name"
+        placeholder="Football club name"
         width="100%"
       />
       <Text
@@ -141,6 +141,7 @@ exports[`Button renders correctly 1`] = `
         Result:
       </Text>
       <RCTScrollView
+        keyboardShouldPersistTaps="handled"
         style={
           Object {
             "width": "100%",
@@ -281,10 +282,12 @@ exports[`Button renders correctly 1`] = `
                     },
                     undefined,
                     Object {
+                      "alignItems": "center",
                       "borderColor": "#553555",
                       "borderRadius": 5,
                       "borderWidth": 1,
-                      "padding": 2,
+                      "justifyContent": "center",
+                      "padding": 5,
                     },
                   ]
                 }
@@ -426,10 +429,12 @@ exports[`Button renders correctly 1`] = `
                     },
                     undefined,
                     Object {
+                      "alignItems": "center",
                       "borderColor": "#553555",
                       "borderRadius": 5,
                       "borderWidth": 1,
-                      "padding": 2,
+                      "justifyContent": "center",
+                      "padding": 5,
                     },
                   ]
                 }
@@ -571,10 +576,12 @@ exports[`Button renders correctly 1`] = `
                     },
                     undefined,
                     Object {
+                      "alignItems": "center",
                       "borderColor": "#553555",
                       "borderRadius": 5,
                       "borderWidth": 1,
-                      "padding": 2,
+                      "justifyContent": "center",
+                      "padding": 5,
                     },
                   ]
                 }

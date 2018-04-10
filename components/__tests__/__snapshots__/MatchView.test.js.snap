@@ -724,13 +724,12 @@ exports[`Matchview MatchView renders correctly 1`] = `
 <View
   backgroundColor="#ADF1D2"
   flex={1}
+  paddingTop={30}
 >
   <RCTScrollView
     contentContainerStyle={
       Object {
         "backgroundColor": "#ADF1D2",
-        "height": 889.3333333333334,
-        "justifyContent": "space-around",
       }
     }
   >
@@ -741,83 +740,117 @@ exports[`Matchview MatchView renders correctly 1`] = `
         minHeight="10%"
         padding={5}
       >
-        <View
-          flexDirection="row"
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          />
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#553555",
-                  "fontFamily": "poppins",
-                },
-                Object {
-                  "color": "#553555",
-                  "fontFamily": "poppins",
-                  "fontSize": 20,
-                },
-                Object {
-                  "marginLeft": 2,
-                },
-              ]
-            }
-            type="header"
-          >
-            Camp Nou
-          </Text>
-        </View>
-        <View
-          marginLeft={27}
-          marginRight={5}
-        >
+        <View>
           <View
-            alignItems="center"
-            flexDirection="row"
-            justifyContent="space-between"
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "flexDirection": "row",
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
           >
             <Text
               accessible={true}
               allowFontScaling={true}
               ellipsizeMode="tail"
+            />
+            <View
               style={
-                Array [
-                  Object {
-                    "color": "#553555",
-                    "fontFamily": "poppins",
-                  },
-                  undefined,
-                  undefined,
-                ]
+                Object {
+                  "borderBottomColor": "#553555",
+                  "borderBottomWidth": 1,
+                }
               }
             >
-              Capacity: 
-              121749
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Array [
-                  Object {
-                    "color": "#553555",
-                    "fontFamily": "poppins",
-                  },
-                  undefined,
-                  undefined,
-                ]
-              }
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#553555",
+                      "fontFamily": "poppins",
+                    },
+                    Object {
+                      "color": "#553555",
+                      "fontFamily": "poppins",
+                      "fontSize": 20,
+                    },
+                    Object {
+                      "marginLeft": 2,
+                    },
+                  ]
+                }
+                type="header"
+              >
+                Camp Nou
+              </Text>
+            </View>
+          </View>
+          <View
+            marginLeft={27}
+            marginRight={5}
+          >
+            <View
+              alignItems="center"
+              flexDirection="row"
+              justifyContent="space-between"
             >
-              2017/11/18
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#553555",
+                      "fontFamily": "poppins",
+                    },
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Capacity: 
+                121749
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#553555",
+                      "fontFamily": "poppins",
+                    },
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                2017/11/18
+              </Text>
+            </View>
           </View>
         </View>
         <View
@@ -848,32 +881,33 @@ exports[`Matchview MatchView renders correctly 1`] = `
           testID={undefined}
           tvParallaxProperties={undefined}
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-          />
           <View
-            marginRight={8}
-          />
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
-              Array [
-                Object {
-                  "color": "#553555",
-                  "fontFamily": "poppins",
-                },
-                undefined,
-                undefined,
-              ]
+              Object {
+                "borderBottomColor": "#553555",
+                "borderBottomWidth": 1,
+              }
             }
           >
-            Home team: 
-            Barcelona
-          </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#553555",
+                    "fontFamily": "poppins",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              Home team: 
+              Barcelona
+            </Text>
+          </View>
         </View>
       </View>
       <Image
@@ -884,8 +918,9 @@ exports[`Matchview MatchView renders correctly 1`] = `
         }
         style={
           Object {
-            "height": "50%",
-            "width": "100%",
+            "height": 667,
+            "marginTop": 10,
+            "width": 750,
           }
         }
       />
@@ -1260,99 +1295,133 @@ exports[`Matchview MatchView top renders correctly with edit false 1`] = `
   minHeight="10%"
   padding={5}
 >
-  <View
-    flexDirection="row"
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={false}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontSize": 25,
-          },
-          undefined,
-          Object {
-            "fontFamily": "entypo",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-        ]
-      }
-    >
-      
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-          },
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-            "fontSize": 20,
-          },
-          Object {
-            "marginLeft": 2,
-          },
-        ]
-      }
-      type="header"
-    >
-      Camp Nou
-    </Text>
-  </View>
-  <View
-    marginLeft={27}
-    marginRight={5}
-  >
+  <View>
     <View
-      alignItems="center"
-      flexDirection="row"
-      justifyContent="space-between"
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
     >
       <Text
         accessible={true}
-        allowFontScaling={true}
+        allowFontScaling={false}
         ellipsizeMode="tail"
         style={
           Array [
             Object {
               "color": "#553555",
-              "fontFamily": "poppins",
+              "fontSize": 25,
             },
             undefined,
-            undefined,
-          ]
-        }
-      >
-        Capacity: 
-        121749
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
             Object {
-              "color": "#553555",
-              "fontFamily": "poppins",
+              "fontFamily": "entypo",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
             },
-            undefined,
-            undefined,
           ]
         }
       >
-        2017/11/18
+        
       </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#553555",
+            "borderBottomWidth": 1,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+                "fontSize": 20,
+              },
+              Object {
+                "marginLeft": 2,
+              },
+            ]
+          }
+          type="header"
+        >
+          Camp Nou
+        </Text>
+      </View>
+    </View>
+    <View
+      marginLeft={27}
+      marginRight={5}
+    >
+      <View
+        alignItems="center"
+        flexDirection="row"
+        justifyContent="space-between"
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          Capacity: 
+          121749
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          2017/11/18
+        </Text>
+      </View>
     </View>
   </View>
   <View
@@ -1383,48 +1452,33 @@ exports[`Matchview MatchView top renders correctly with edit false 1`] = `
     testID={undefined}
     tvParallaxProperties={undefined}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={false}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": undefined,
-            "fontSize": 15,
-          },
-          undefined,
-          Object {
-            "fontFamily": "material",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-        ]
-      }
-    >
-      
-    </Text>
     <View
-      marginRight={8}
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-          },
-          undefined,
-          undefined,
-        ]
+        Object {
+          "borderBottomColor": "#553555",
+          "borderBottomWidth": 1,
+        }
       }
     >
-      Home team: 
-      Barcelona
-    </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#553555",
+              "fontFamily": "poppins",
+            },
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        Home team: 
+        Barcelona
+      </Text>
+    </View>
   </View>
 </View>
 `;
@@ -1436,99 +1490,133 @@ exports[`Matchview MatchView top renders correctly with edit true 1`] = `
   minHeight="10%"
   padding={5}
 >
-  <View
-    flexDirection="row"
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={false}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontSize": 25,
-          },
-          undefined,
-          Object {
-            "fontFamily": "entypo",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-        ]
-      }
-    >
-      
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-          },
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-            "fontSize": 20,
-          },
-          Object {
-            "marginLeft": 2,
-          },
-        ]
-      }
-      type="header"
-    >
-      Camp Nou
-    </Text>
-  </View>
-  <View
-    marginLeft={27}
-    marginRight={5}
-  >
+  <View>
     <View
-      alignItems="center"
-      flexDirection="row"
-      justifyContent="space-between"
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
     >
       <Text
         accessible={true}
-        allowFontScaling={true}
+        allowFontScaling={false}
         ellipsizeMode="tail"
         style={
           Array [
             Object {
               "color": "#553555",
-              "fontFamily": "poppins",
+              "fontSize": 25,
             },
             undefined,
-            undefined,
-          ]
-        }
-      >
-        Capacity: 
-        121749
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Array [
             Object {
-              "color": "#553555",
-              "fontFamily": "poppins",
+              "fontFamily": "entypo",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
             },
-            undefined,
-            undefined,
           ]
         }
       >
-        2017/11/18
+        
       </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#553555",
+            "borderBottomWidth": 1,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+                "fontSize": 20,
+              },
+              Object {
+                "marginLeft": 2,
+              },
+            ]
+          }
+          type="header"
+        >
+          Camp Nou
+        </Text>
+      </View>
+    </View>
+    <View
+      marginLeft={27}
+      marginRight={5}
+    >
+      <View
+        alignItems="center"
+        flexDirection="row"
+        justifyContent="space-between"
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          Capacity: 
+          121749
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#553555",
+                "fontFamily": "poppins",
+              },
+              undefined,
+              undefined,
+            ]
+          }
+        >
+          2017/11/18
+        </Text>
+      </View>
     </View>
   </View>
   <View
@@ -1559,48 +1647,33 @@ exports[`Matchview MatchView top renders correctly with edit true 1`] = `
     testID={undefined}
     tvParallaxProperties={undefined}
   >
-    <Text
-      accessible={true}
-      allowFontScaling={false}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {
-            "color": undefined,
-            "fontSize": 15,
-          },
-          undefined,
-          Object {
-            "fontFamily": "material",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-        ]
-      }
-    >
-      
-    </Text>
     <View
-      marginRight={8}
-    />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
-        Array [
-          Object {
-            "color": "#553555",
-            "fontFamily": "poppins",
-          },
-          undefined,
-          undefined,
-        ]
+        Object {
+          "borderBottomColor": "#553555",
+          "borderBottomWidth": 1,
+        }
       }
     >
-      Home team: 
-      Barcelona
-    </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#553555",
+              "fontFamily": "poppins",
+            },
+            undefined,
+            undefined,
+          ]
+        }
+      >
+        Home team: 
+        Barcelona
+      </Text>
+    </View>
   </View>
 </View>
 `;

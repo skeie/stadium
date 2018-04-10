@@ -2,10 +2,12 @@
 
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import _get from 'lodash/get';
 // $FlowFixMe
 import { ImagePicker, Location, Permissions } from 'expo';
 import { get } from '../api/fetch';
 import Loading from '../components/Loading';
+import tracking from '../util/tracking';
 type State = {
   showErrorModal: boolean,
   resultData: any,
@@ -40,13 +42,18 @@ class GetPhoto extends Component<*, State> {
       allowsEditing: false,
       aspect: [4, 3],
       exif: true,
-      base64: true,
     });
 
     if (!result.cancelled) {
       this.date = this.getDate(result.exif);
-      this.uri = `data:image/png;base64,${result.base64}`;
-      if (!result.exif.GPSLatitude) {
+      this.uri = result.uri;
+      const coordinate = _get(result, 'exif.GPSLatitude');
+      if (!this.date) {
+        // Pretend to be smart
+        setTimeout(() => {
+          this.props.showNoMetaDataModal();
+        }, 2000);
+      } else if (!coordinate) {
         // Pretend to be smart
         setTimeout(() => {
           this.props.showSearchClubModal(this.uri, this.date);
@@ -66,6 +73,7 @@ class GetPhoto extends Component<*, State> {
   };
 
   componentDidMount() {
+    tracking.screenView('GetPhoto');
     this.getPhoto();
   }
 

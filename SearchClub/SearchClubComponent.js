@@ -28,40 +28,46 @@ type Props = {
   text: string,
   onHandleTextInput: (text: string) => *,
   getMatchData: (club: Footballclub) => *,
-  footballclubResult?: FootballclubResult,
+  footballclubResult: ?FootballclubResult,
   fetching?: boolean,
   toggleModal: () => void,
+  title?: string,
+  subTitle?: string,
 };
 
 const SearchClub = ({
   isVisible,
   onHandleTextInput,
-  footballclubResult = [],
+  footballclubResult,
   getMatchData,
   fetching,
   toggleModal,
+  title = 'Oops, there was a problem with that image',
+  subTitle = 'Please search and then select the home team in the image.',
 }: Props) => {
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <View style={styles.modalContainer}>
         <Poppins style={{ marginBottom: 20 }} type="header">
-          Oops, we could't not find anything with that picture :-(
+          {title}
         </Poppins>
-        <Poppins style={{ width: '100%' }}>
-          Please search and then select the home team in the picture you choose.
-        </Poppins>
+        <Poppins style={{ width: '100%' }}>{subTitle}</Poppins>
         <TextInput
           width="100%"
           height={50}
           autoFocus
-          placeholder="Football stadium name"
+          placeholder="Football club name"
           onChangeText={onHandleTextInput}
         />
 
         <Poppins width="100%" type="subHeader">
           Result:
         </Poppins>
-        {fetching && <Loading />}
+        {fetching && (
+          <View paddingVertical={20}>
+            <Loading />
+          </View>
+        )}
         {footballclubResult && (
           <ScrollView style={{ width: '100%' }} keyboardShouldPersistTaps="handled">
             {footballclubResult.map((result, index) => (
@@ -91,9 +97,11 @@ const SearchClub = ({
                   <Poppins
                     style={{
                       borderRadius: 5,
-                      padding: 2,
+                      padding: 5,
                       borderWidth: 1,
                       borderColor: colors.primaryText,
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
                   >
                     Select

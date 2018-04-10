@@ -5,17 +5,23 @@ import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import { authLink } from './util/auth';
+import tracking from './util/tracking';
 
 const httpLink = new HttpLink({
-  uri: __DEV__ ? 'http://localhost:4000' : 'https://hackernews-node-buajwtgmuu.now.sh',
+  uri: __DEV__ ? 'http://localhost:4000' : 'https://hackernews-node-riucfzpteu.now.sh',
 });
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    tracking.init();
+  }
+
   state = {
     isLoadingComplete: false,
   };
@@ -75,7 +81,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   statusBarUnderlay: {
     height: 24,

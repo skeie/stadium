@@ -13,19 +13,25 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 import Photo from '../Photo/GetPhotoScreen';
 import MatchView from '../MatchView/MatchViewScreen';
 import Login from '../Login/LoginScreen';
+import HomeScreen from '../GridView/GridScreen';
 
 import SearchClubModal from '../SearchClub/SearchClubModal';
+import NoMetaDataModal from '../NoMetaData/NoMetaDataModal';
 import { isSignedIn } from '../util/auth';
 import Loading from '../components/Loading';
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
-const rootStackNavigator = (signedIn: boolean) =>
+// Main: {
+//   screen: MainTabNavigator,
+// },
+
+const rootStackNavigator = (isSignedIn: boolean) =>
   StackNavigator(
     {
       Main: {
-        screen: MainTabNavigator,
+        screen: HomeScreen,
       },
       Photo: {
         screen: Photo,
@@ -38,7 +44,7 @@ const rootStackNavigator = (signedIn: boolean) =>
       },
     },
     {
-      initialRouteName: signedIn ? 'Main' : 'Login',
+      initialRouteName: isSignedIn ? 'Main' : 'Login',
       navigationOptions: () => ({
         headerTitleStyle: {
           fontWeight: 'normal',
@@ -52,6 +58,7 @@ const mainModalNavigator = (signedIn: boolean) =>
     {
       RootStackNavigator: { screen: rootStackNavigator(signedIn) },
       SearchClubModal: { screen: SearchClubModal },
+      NoMetaData: { screen: NoMetaDataModal },
     },
     {
       mode: 'modal',
@@ -76,6 +83,10 @@ export default class RootNavigator extends React.Component<*, *> {
   }
 
   getUser = async () => {
+    this.setState({
+      isLoggedIn: null,
+      checkedSignIn: false,
+    });
     const isLoggedIn = await isSignedIn();
     this.setState({
       isLoggedIn,
@@ -87,9 +98,8 @@ export default class RootNavigator extends React.Component<*, *> {
     if (!this.state.checkedSignIn) {
       return null;
     }
-
     const MainScreen = mainModalNavigator(this.state.isLoggedIn);
-    return <MainScreen />;
+    return <MainScreen {...this.props} />;
   }
 
   registerForPushNotifications() {

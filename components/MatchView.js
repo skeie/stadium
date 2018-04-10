@@ -7,8 +7,9 @@ import colors from '../constants/Colors';
 import { Poppins } from './StyledText';
 import Top from './MatchView/Top';
 import ScoreView from './MatchView/ScoreView';
+import User from './User';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 export type Match = {
   stadium: { capacity: number, name: string },
@@ -20,30 +21,38 @@ export type Match = {
   goalScorers: Array<GoalScorer>,
   uri: string,
   date: string,
+  user: {
+    name: string,
+  },
 };
 
 export type Props = Match & {
   onChangeHomeTeam: string => void,
   editable?: boolean,
+  onChangeStadium?: () => *,
 };
 
 export type GoalScorer = {
   name: string,
-  minute: Array<string>,
+  minute: string,
   team: string,
 };
 
 const MatchView = (props: Props) => {
+  if (!props.stadium) {
+    return null;
+  }
+
   return (
-    <View flex={1} backgroundColor={colors.primary}>
+    <View flex={1} backgroundColor={colors.primary} paddingTop={30}>
       <ScrollView
         contentContainerStyle={{
-          height: height / 1.5,
-          justifyContent: 'space-around',
           backgroundColor: colors.primary,
         }}
       >
+        <User user={props.user} />
         <Top
+          onChangeStadium={props.onChangeStadium}
           name={props.stadium.name}
           capacity={props.stadium.capacity}
           date={props.date}
@@ -52,7 +61,7 @@ const MatchView = (props: Props) => {
           editable={props.editable}
         />
         <Image
-          style={{ width: '100%', height: '50%' }}
+          style={{ width, height: height / 2, marginTop: 10 }}
           source={{
             uri: props.uri,
           }}

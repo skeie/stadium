@@ -8,6 +8,7 @@ import type { Match } from '../components/MatchView';
 import { searchClubQL, getMatchQL } from './SearchClubQL';
 import { GetResultBytFootbalTeam } from './GetResultBytFootbalTeamGQL';
 import SearchClubUI from './SearchClubComponent';
+import tracking from '../util/tracking';
 
 type Footballclub = {
   capacity: string,
@@ -18,10 +19,10 @@ type Footballclub = {
 type FootballclubResult = Array<Footballclub>;
 
 type State = {
-  footballclubResult: FootballclubResult,
+  footballclubResult: ?FootballclubResult,
   text: string,
   isVisible: boolean,
-  data?: any,
+  loading: boolean,
 };
 
 type Props = {
@@ -31,6 +32,9 @@ type Props = {
   getClub: QueryProps,
   onGoBack: () => void,
   getMatch: QueryProps,
+  onSelect?: () => *,
+  title?: string,
+  subTitle?: string,
 };
 
 class SearchClub extends Component<Props, State> {
@@ -38,19 +42,25 @@ class SearchClub extends Component<Props, State> {
     text: '',
     isVisible: true,
     footballclubResult: [],
+    loading: false,
   };
 
   timeout: number;
 
-  onHandleTextInput = (text: string) => {
+  componentDidMount() {
+    tracking.screenView('SearchClub');
+  }
+
+  queryFootballClub = (text: string) => {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(async () => {
+      tracking.sendEvent({ searchQuery: text });
       const { data } = await this.props.getClub({
         variables: {
-          clubName: text,
+          clubName: text.trim(),
         },
       });
-      this.setState({ text, footballclubResult: data.getClub });
+      this.setState({ text, footballclubResult: data.getClub, loading: false });
     }, 600);
   };
 
@@ -61,6 +71,7 @@ class SearchClub extends Component<Props, State> {
         date: this.props.date,
       },
     });
+    tracking.sendEvent({ selectedData: data });
     this.handleClubSelect(data);
   };
 
@@ -69,7 +80,7 @@ class SearchClub extends Component<Props, State> {
     matchBasedOnFootballTeam.date = this.props.date;
     this.setState({
       isVisible: false,
-      data: null,
+      footballclubResult: null,
     });
 
     this.props.onNext(matchBasedOnFootballTeam);
@@ -84,17 +95,42 @@ class SearchClub extends Component<Props, State> {
     );
   };
 
+  initGetMatchData = (club: Footballclub) => {
+    this.setState(
+      {
+        loading: true,
+        footballclubResult: null,
+      },
+      () => {
+        this.getMatchData(club);
+      },
+    );
+  };
+
+  onHandleTextInput = (query: string) => {
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        this.queryFootballClub(query);
+      },
+    );
+  };
+
   render() {
-    console.log('sapdap', this.props);
+    const { onSelect = this.initGetMatchData, title, subTitle } = this.props;
     return (
       <SearchClubUI
         text={this.state.text}
         isVisible={this.state.isVisible}
         footballclubResult={this.state.footballclubResult}
         onHandleTextInput={this.onHandleTextInput}
-        getMatchData={this.getMatchData}
-        fetching={false}
+        getMatchData={onSelect}
+        fetching={this.state.loading}
         toggleModal={this.handleToggleModal}
+        title={title}
+        subTitle={subTitle}
       />
     );
   }

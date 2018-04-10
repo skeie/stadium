@@ -19,12 +19,17 @@ export default class GetPhotoScreen extends React.Component<*, *> {
     this.props.navigation.navigate('SearchClubModal', { uri, date });
   };
 
+  showNoMetaDataModal = () => {
+    this.props.navigation.navigate('NoMetaData');
+  };
+
   render() {
     return (
       <GetPhoto
         {...this.props}
         showSearchClubModal={this.showSearchClubModal}
         onBack={this.handleBack}
+        showNoMetaDataModal={this.showNoMetaDataModal}
       />
     );
   }

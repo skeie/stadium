@@ -15,7 +15,7 @@ const getTestView = () => {
   if (__DEV__) {
     return {
       Test: {
-        screen: Login,
+        screen: MatchView,
       },
     };
   } else {
@@ -25,13 +25,13 @@ const getTestView = () => {
 
 export default TabNavigator(
   {
+    ...getTestView(),
     Home: {
       screen: HomeScreen,
     },
     // Statistics: {
     //     screen: LinksScreen,
     // },
-    ...getTestView(),
   },
   {
     navigationOptions: ({ navigation }) => ({

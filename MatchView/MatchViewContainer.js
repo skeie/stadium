@@ -2,48 +2,49 @@
 
 import React, { Component } from 'react';
 import { View } from 'react-native';
+// $FlowFixMe
+import { graphql, compose, QueryProps } from 'react-apollo';
 import MatchViewUI from '../components/MatchView';
+import { MatchMutation } from './MatchViewQL';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { post } from '../api/fetch';
 import colors from '../constants/Colors';
-import { MatchMutation, MatchQuery } from './MatchViewQL';
 import { uploadPhoto } from '../api/fetch';
-// $FlowFixMe
-import { graphql, compose, QueryProps } from 'react-apollo';
 import omitDeep from 'omit-deep-lodash';
 import type { Match } from '../components/MatchView';
 import { updateGoalscorer } from './matchViewUtil';
+import tracking from '../util/tracking';
+import SearchClubContainer from '../SearchClub/SearchClubContainer';
 
 type Props = {
-  date: string,
-  lat: number,
-  long: number,
-  uri: string,
-  matchQuery: QueryProps,
-  matchMutation: *,
+  match: Match,
   goBack: () => void,
+  uri: string,
+  matchMutation: QueryProps,
+  onFinish: () => void,
+  getClub: QueryProps,
 };
 
 type State = {
-  match?: Match,
+  url: ?string,
+  match: Match,
+  loading: boolean,
+  showModal: boolean,
 };
 
-class MatchViewContainer extends Component<Props, *> {
-  image: string;
+class MatchViewContainer extends Component<Props, State> {
+  image: { url: string };
+  timeout: number;
 
-  state = {
-    match: null,
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (!nextProps.matchQuery.loading && this.props.matchQuery.loading) {
-      const { match } = nextProps.matchQuery;
-      const props = { ...match, uri: this.image, date: this.props.date };
-      this.setState({
-        match: props,
-      });
-    }
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      url: null,
+      match: this.props.match,
+      loading: false,
+      showModal: false,
+    };
   }
 
   changeMatch = (property: string) => (value: string) => {
@@ -63,45 +64,83 @@ class MatchViewContainer extends Component<Props, *> {
   handleChangeHomeTeam = this.changeMatch('homeTeam');
 
   componentDidMount() {
+    tracking.screenView('MatchView');
     if (!__DEV__) {
       this.uploadPhoto();
     } else {
-      this.image = 'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg';
+      this.setState({
+        url: 'https://files.graph.cool/cjdizt45h14ca016541zn4b91/cjdj0ihen0ris01022fxo8dkg',
+      });
     }
   }
 
   uploadPhoto = async () => {
     const image = await uploadPhoto(this.props.uri);
-    this.image = image.url;
+    this.setState({
+      url: image.url,
+    });
   };
 
-  handleSave = async () => {
-    const match = omitDeep(this.state.match, '__typename');
+  handleSave = () => {
+    this.setState(
+      {
+        loading: true,
+      },
+      this.postData,
+    );
+  };
+
+  postData = async () => {
+    const cleanMatch = omitDeep(this.state.match, '__typename');
+    const match = { ...cleanMatch, uri: this.state.url };
     try {
       await this.props.matchMutation({
         variables: {
           ...match,
         },
       });
-      this.props.goBack();
+      this.props.onFinish();
     } catch (error) {
-      console.log('something bad happen, try again');
+      console.log('something bad happen, try again', error);
     }
   };
 
+  handleGetClub = (stadium: *) => {
+    this.setState({
+      showModal: false,
+      match: {
+        ...this.state.match,
+        stadium: {
+          name: stadium.stadiumName,
+          capacity: stadium.capacity,
+        },
+      },
+    });
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
   render() {
-    const { loading } = this.props.matchQuery;
-    if (loading && !this.state.match) {
+    if (!this.state.url) {
       return (
         <View flex={1} justifyContent="center" alignItems="center">
           <Loading />
         </View>
       );
     }
-    console.log('sapdap 2 2');
+    const match = { ...this.state.match, uri: this.state.url };
     return (
       <View flex={1}>
-        <MatchViewUI editable onChangeHomeTeam={this.handleChangeHomeTeam} {...this.state.match} />
+        <MatchViewUI
+          editable
+          onChangeStadium={this.toggleModal}
+          onChangeHomeTeam={this.handleChangeHomeTeam}
+          {...match}
+        />
         <View
           flexDirection="row"
           height="15%"
@@ -109,11 +148,21 @@ class MatchViewContainer extends Component<Props, *> {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Button style={{ width: '40%' }}>Discard</Button>
-          <Button style={{ width: '40%' }} onPress={this.handleSave}>
+          <Button style={{ width: '40%' }} onPress={this.props.goBack}>
+            Discard
+          </Button>
+          <Button style={{ width: '40%' }} onPress={this.handleSave} loading={this.state.loading}>
             Save
           </Button>
         </View>
+        {this.state.showModal && (
+          <SearchClubContainer
+            title="Change stadium"
+            subTitle="Write the name of the club, and select their stadium"
+            onGoBack={this.toggleModal}
+            onSelect={this.handleGetClub}
+          />
+        )}
       </View>
     );
   }
@@ -122,8 +171,5 @@ class MatchViewContainer extends Component<Props, *> {
 export default compose(
   graphql(MatchMutation, {
     name: 'matchMutation',
-  }),
-  graphql(MatchQuery, {
-    name: 'matchQuery',
   }),
 )(MatchViewContainer);

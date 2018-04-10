@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Keyboard } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import _get from 'lodash/get';
 import EmptyView from '../components/EmptyHomeView';
@@ -13,6 +13,7 @@ import colors from '../constants/Colors';
 import { graphql, QueryProps } from 'react-apollo';
 import { FeedQuery } from './GridGQL';
 import Loading from '../components/Loading';
+import tracking from '../util/tracking';
 
 type Resultdata = {
   stadium: { capacity: number, name: string },
@@ -53,6 +54,7 @@ type State = {
 type Props = {
   feed: QueryProps,
   onGoToPhoto: () => void,
+  forceRefetch?: boolean,
 };
 
 const actions = [
@@ -65,6 +67,14 @@ const actions = [
 ];
 class HomeScreen extends Component<Props, State> {
   state = { resultdata: null, text: '', showErrorModal: false };
+
+  componentDidMount() {
+    tracking.screenView('GridView');
+    if (this.props.forceRefetch) {
+      this.props.feed.refetch();
+    }
+    Keyboard.dismiss();
+  }
 
   keyExtractor = (item: Match, index: number) => `${item.uri}-${item.date}-${index}`;
 
@@ -79,18 +89,18 @@ class HomeScreen extends Component<Props, State> {
         </View>
       );
     }
-
     const showEmptyView =
       _get(this.props, 'navigation.state.params.showFirstTimeView') ||
       !feed.feed ||
       feed.feed.length === 0;
 
     return (
-      <View flex={1}>
+      <View flex={1} backgroundColor={colors.primary}>
         {showEmptyView ? (
           <EmptyView />
         ) : (
           <FlatList
+            contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.primary }}
             keyExtractor={this.keyExtractor}
             ItemSeparatorComponent={this.renderSeparator}
             data={feed.feed}
