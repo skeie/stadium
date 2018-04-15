@@ -14,6 +14,7 @@ import { graphql, QueryProps, Query } from 'react-apollo';
 import { FeedQuery } from './GridGQL';
 import Loading from '../components/Loading';
 import tracking from '../util/tracking';
+import CommonGrid from '../components/CommonGrid';
 
 type Resultdata = {
   stadium: { capacity: number, name: string },
@@ -44,13 +45,6 @@ type Footballclub = {
 
 type FootballclubResult = Array<Footballclub>;
 
-type State = {
-  resultdata: ?Resultdata,
-  text: string,
-  footballclubResult?: FootballclubResult,
-  showErrorModal: boolean,
-};
-
 type Props = {
   feed: QueryProps,
   onGoToPhoto: () => void,
@@ -65,15 +59,9 @@ const actions = [
     icon: <MaterialIcons name="photo" size={18} color="white" />,
   },
 ];
-class HomeScreen extends Component<Props, State> {
-  state = { resultdata: null, text: '', showErrorModal: false };
-
+class HomeScreen extends Component<Props> {
   componentDidMount() {
     tracking.screenView('GridView');
-    if (this.props.forceRefetch) {
-      this.props.feed.refetch();
-    }
-    Keyboard.dismiss();
   }
 
   keyExtractor = (item: Match, index: number) => `${item.uri}-${item.date}-${index}`;
@@ -81,34 +69,18 @@ class HomeScreen extends Component<Props, State> {
   renderSeparator = () => <View height={5} backgroundColor={colors.primaryText} />;
 
   render() {
-    const { feed } = this.props;
-    if (feed.loading) {
-      return (
-        <View flex={1} justifyContent="center" alignItems="center">
-          <Loading />
-        </View>
-      );
-    }
-    const showEmptyView =
-      _get(this.props, 'navigation.state.params.showFirstTimeView') ||
-      !feed.feed ||
-      feed.feed.length === 0;
-
     return (
-      <View flex={1} backgroundColor={colors.primary}>
-        {showEmptyView ? (
-          <EmptyView />
-        ) : (
+      <CommonGrid {...this.props}>
+        {() => (
           <FlatList
             contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.primary }}
             keyExtractor={this.keyExtractor}
             ItemSeparatorComponent={this.renderSeparator}
-            data={feed.feed}
+            data={this.props.feed.feed}
             renderItem={item => <MatchView {...item.item} isEdit={false} />}
           />
         )}
-        <FloatingAction actions={actions} onPressItem={this.props.onGoToPhoto} />
-      </View>
+      </CommonGrid>
     );
   }
 }

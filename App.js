@@ -9,7 +9,7 @@ import { authLink } from './util/auth';
 import tracking from './util/tracking';
 
 const httpLink = new HttpLink({
-  uri: __DEV__ ? 'http://localhost:4000' : 'https://hackernews-node-riucfzpteu.now.sh',
+  uri: __DEV__ ? 'http://localhost:4000' : 'https://hackernews-node-tstiokqjyu.now.sh',
 });
 
 const client = new ApolloClient({

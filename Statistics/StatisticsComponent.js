@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
+// $FlowFixMe
 import { SafeAreaView } from 'react-navigation';
 import { Poppins } from '../components/StyledText';
 import colors from '../constants/Colors';

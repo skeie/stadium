@@ -42,7 +42,7 @@ class Loading extends Component<*, *> {
     };
 
     return (
-      <View flex={1} justifyContent="center" alignItems="center">
+      <View>
         <Animated.View style={imageStyle}>
           <MaterialCommunityIcons name="stadium" size={64} color="#553555" />
         </Animated.View>

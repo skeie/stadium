@@ -1,12 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
+// $FlowFixMe
 import { graphql, compose } from 'react-apollo';
 import Statistics from './StatisticsComponent';
 import { FeedQuery } from '../GridView/GridGQL';
 import Loading from '../components/Loading';
 import EmptyView from '../components/EmptyHomeView';
 import type { Match } from '../components/MatchView';
+import CommonGrid from '../components/CommonGrid';
 
 type Props = {
   feed: {
@@ -74,14 +76,11 @@ export class StatisticsContainer extends Component<*> {
   };
 
   render() {
-    if (this.props.feed.loading) {
-      return <Loading />;
-    }
-    if (this.props.feed.feed.length === 0) {
-      return <EmptyView />;
-    }
-    const statistics = this.data(this.props.feed.feed);
-    return <Statistics {...statistics} />;
+    return (
+      <CommonGrid {...this.props}>
+        {() => <Statistics {...this.data(this.props.feed.feed)} />}
+      </CommonGrid>
+    );
   }
 }
 
