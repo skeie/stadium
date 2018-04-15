@@ -52,7 +52,7 @@ class MatchViewContainer extends Component<Props, *> {
         </View>
       );
     }
-    console.log('sapdap', this.props);
+
     return (
       <MatchView
         match={this.state.match}

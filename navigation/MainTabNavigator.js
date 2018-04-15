@@ -10,6 +10,7 @@ import HomeScreen from '../GridView/GridScreen';
 import MatchView from '../screens/TestView';
 import Login from '../Login/LoginScreen';
 import GetPhoto from '../Photo/GetPhotoScreen';
+import Statistics from '../Statistics/StatisticsScreen';
 
 const getTestView = () => {
   if (__DEV__) {
@@ -22,16 +23,15 @@ const getTestView = () => {
     return {};
   }
 };
-
+// ...getTestView(),
 export default TabNavigator(
   {
-    ...getTestView(),
     Home: {
       screen: HomeScreen,
     },
-    // Statistics: {
-    //     screen: LinksScreen,
-    // },
+    Statistics: {
+      screen: Statistics,
+    },
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -58,9 +58,9 @@ export default TabNavigator(
         );
       },
     }),
-    tabBarComponent: TabBarBottom,
+    tabBarComponent: props => <TabBarBottom {...props} />,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
+    animationEnabled: true,
     swipeEnabled: false,
   },
 );

@@ -31,7 +31,7 @@ const rootStackNavigator = (isSignedIn: boolean) =>
   StackNavigator(
     {
       Main: {
-        screen: HomeScreen,
+        screen: MainTabNavigator,
       },
       Photo: {
         screen: Photo,
@@ -107,10 +107,9 @@ export default class RootNavigator extends React.Component<*, *> {
     // You can comment the following line out if you want to stop receiving
     // a notification every time you open the app. Check out the source
     // for this function in api/registerForPushNotificationsAsync.js
-    registerForPushNotificationsAsync();
-
+    // THE CODE: registerForPushNotificationsAsync();
     // Watch for incoming notifications
-    this.notificationSubscription = Notifications.addListener(this._handleNotification);
+    // THE CODE: this.notificationSubscription = Notifications.addListener(this._handleNotification);
   }
 
   _handleNotification = ({ origin, data }) => {

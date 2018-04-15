@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const FeedQuery = gql`
-  query {
-    feed {
+  query($filter: Filter) {
+    feed(filter: $filter) {
       user {
         name
       }

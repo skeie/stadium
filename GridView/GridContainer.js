@@ -10,7 +10,7 @@ import type { Match } from '../components/MatchView';
 import MatchView from '../components/MatchView';
 import colors from '../constants/Colors';
 // $FlowFixMe
-import { graphql, QueryProps } from 'react-apollo';
+import { graphql, QueryProps, Query } from 'react-apollo';
 import { FeedQuery } from './GridGQL';
 import Loading from '../components/Loading';
 import tracking from '../util/tracking';
@@ -113,4 +113,9 @@ class HomeScreen extends Component<Props, State> {
   }
 }
 
-export default graphql(FeedQuery, { name: 'feed' })(HomeScreen);
+export default graphql(FeedQuery, {
+  name: 'feed',
+  options: () => {
+    return { variables: { filter: { myRoutes: false } } };
+  },
+})(HomeScreen);
