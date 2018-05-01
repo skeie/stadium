@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyHomeView renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ADF1D2",
+      "flex": 1,
+      "height": "100%",
+      "justifyContent": "center",
+      "padding": 20,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#553555",
+          "fontFamily": "poppins",
+        },
+        Object {
+          "color": "#553555",
+          "fontFamily": "poppins",
+          "fontSize": 20,
+        },
+        Object {
+          "marginBottom": 20,
+        },
+      ]
+    }
+    type="header"
+  >
+    Welcome to Stadiumz!
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#553555",
+          "fontFamily": "poppins",
+        },
+        undefined,
+        Object {
+          "marginBottom": 20,
+          "textAlign": "left",
+          "width": "100%",
+        },
+      ]
+    }
+  >
+    • An app that helps you keep track of the football matches you have attended
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#553555",
+          "fontFamily": "poppins",
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    • Press on the plus icon in the down right corner to start and select a photo of football stadiums and see the magic happen
+  </Text>
+</View>
+`;

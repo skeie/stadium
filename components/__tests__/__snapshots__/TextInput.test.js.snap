@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput renders correctly 1`] = `
+<TextInput
+  allowFontScaling={true}
+  autoGrow={true}
+  placeholderTextColor="#6B5F6B"
+  style={
+    Array [
+      Object {
+        "color": "#553555",
+        "fontFamily": "poppins",
+      },
+      undefined,
+      undefined,
+    ]
+  }
+  underlineColorAndroid="transparent"
+/>
+`;
