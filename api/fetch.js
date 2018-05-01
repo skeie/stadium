@@ -31,7 +31,6 @@ export const uploadPhoto = localUri => {
       return response.json();
     })
     .then(image => {
-      console.log(image);
       return image;
     })
     .catch(error => console.error(`Error uploading image`));

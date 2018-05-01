@@ -30,6 +30,7 @@ export type Props = Match & {
   onChangeHomeTeam: string => void,
   editable?: boolean,
   onChangeStadium?: () => *,
+  onGoToProfile?: () => *,
 };
 
 export type GoalScorer = {
@@ -44,13 +45,13 @@ const MatchView = (props: Props) => {
   }
 
   return (
-    <View flex={1} backgroundColor={colors.primary} paddingTop={30}>
+    <View flex={1} backgroundColor={colors.primary} paddingTop={10}>
       <ScrollView
         contentContainerStyle={{
           backgroundColor: colors.primary,
         }}
       >
-        <User user={props.user} />
+        <User user={props.user} onGoToProfile={props.onGoToProfile} />
         <Top
           onChangeStadium={props.onChangeStadium}
           name={props.stadium.name}
