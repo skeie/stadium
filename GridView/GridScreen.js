@@ -14,6 +14,8 @@ import {
 import Modal from 'react-native-modal';
 // $FlowFixMe
 import { ImagePicker, Location, Permissions } from 'expo';
+// $FlowFixMe
+import { SafeAreaView } from 'react-navigation';
 import _get from 'lodash/get';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MonoText, Poppins } from '../components/StyledText';
@@ -32,8 +34,20 @@ export default class GridScreen extends React.Component<*, *> {
     navigate('Photo');
   };
 
+  onHandleGoToProfile = () => {
+    const { navigate } = this.props.navigation;
+    navigate('Profile');
+  };
   render() {
     const forceRefetch = _get(this.props, 'navigation.state.params.forceRefetch');
-    return <GridContainer onGoToPhoto={this.onHandleGoToPhoto} forceRefetch={forceRefetch} />;
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
+        <GridContainer
+          onGoToPhoto={this.onHandleGoToPhoto}
+          forceRefetch={forceRefetch}
+          onGoToProfile={this.onHandleGoToProfile}
+        />
+      </SafeAreaView>
+    );
   }
 }

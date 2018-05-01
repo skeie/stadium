@@ -14,6 +14,7 @@ import Photo from '../Photo/GetPhotoScreen';
 import MatchView from '../MatchView/MatchViewScreen';
 import Login from '../Login/LoginScreen';
 import HomeScreen from '../GridView/GridScreen';
+import Profile from '../Profile/ProfileScreen';
 
 import SearchClubModal from '../SearchClub/SearchClubModal';
 import NoMetaDataModal from '../NoMetaData/NoMetaDataModal';
@@ -22,10 +23,6 @@ import Loading from '../components/Loading';
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
-
-// Main: {
-//   screen: MainTabNavigator,
-// },
 
 const rootStackNavigator = (isSignedIn: boolean) =>
   StackNavigator(
@@ -41,6 +38,9 @@ const rootStackNavigator = (isSignedIn: boolean) =>
       },
       Login: {
         screen: Login,
+      },
+      Profile: {
+        screen: Profile,
       },
     },
     {

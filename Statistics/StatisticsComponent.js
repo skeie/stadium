@@ -18,6 +18,13 @@ type Props = {
   },
   avgGoal: number,
   matchWithMostGoals: Match,
+  clubs: {
+    [string]: number,
+  },
+  favClub: {
+    club: string,
+    seen: number,
+  },
 };
 
 const Element = ({ children }: { children: React.Node }) => (
@@ -35,7 +42,12 @@ function Statistics(props: Props) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <ScrollView
-        contentContainerStyle={{ backgroundColor: colors.primary, padding: 20, flexGrow: 1 }}
+        contentContainerStyle={{
+          backgroundColor: colors.primary,
+          padding: 20,
+          flexGrow: 1,
+          paddingBottom: 100,
+        }}
       >
         <Poppins style={{ marginBottom: 20 }} type="header">
           Did you know...?
@@ -51,13 +63,13 @@ function Statistics(props: Props) {
         <Element>that you have seen a total of {props.homeVictory} home wins?</Element>
         <Element>that you have seen a total of {props.awayVictory} away wins?</Element>
         <Element>that you have seen a total of {props.even} draws?</Element>
-        <Element>that you average a number of {props.avgGoal} goals per match?</Element>
-        <Element>that you have seen a total of {props.totalGoals} goals?</Element>
+        <Element>that you average a number of {props.avgGoal.toFixed(2)} goals per match?</Element>
         {Object.entries(props.years).map(([key, value]) => (
           <Element key={key}>
             that you went to {value} game(s) in {key}
           </Element>
         ))}
+        <Element>the team you have seen the most is {props.favClub.club}</Element>
       </ScrollView>
     </SafeAreaView>
   );

@@ -37,6 +37,7 @@ class HomeScreen extends React.Component<Props> {
 
   render() {
     const { feed, children } = this.props;
+
     if (feed.loading) {
       return (
         <View flex={1} justifyContent="center" alignItems="center">

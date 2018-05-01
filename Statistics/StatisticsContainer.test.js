@@ -34,3 +34,9 @@ it('Should have the number of vicotires', () => {
   expect(res.homeVictory).toEqual(1);
   expect(res.awayVictory).toEqual(1);
 });
+
+it('Should have fav team', () => {
+  expect(res.clubs['AC Milan']).toEqual(2);
+  expect(res.clubs['Internazionale']).toEqual(1);
+  expect(res.favClub.club).toEqual('AC Milan');
+});

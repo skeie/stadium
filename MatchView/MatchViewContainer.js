@@ -47,6 +47,13 @@ class MatchViewContainer extends Component<Props, State> {
     };
   }
 
+  componentDidMount() {
+    if (!this.props.match) {
+      alert('Sorry, something went wrong, please try again');
+      this.props.goBack();
+    }
+  }
+
   changeMatch = (property: string) => (value: string) => {
     this.setState(({ match }) => ({
       match: {
@@ -75,10 +82,14 @@ class MatchViewContainer extends Component<Props, State> {
   }
 
   uploadPhoto = async () => {
-    const image = await uploadPhoto(this.props.uri);
-    this.setState({
-      url: image.url,
-    });
+    try {
+      const image = await uploadPhoto(this.props.uri);
+      this.setState({
+        url: image.url,
+      });
+    } catch (error) {
+      console.log('error in upload photo', error);
+    }
   };
 
   handleSave = () => {

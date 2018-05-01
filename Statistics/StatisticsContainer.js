@@ -46,6 +46,32 @@ export class StatisticsContainer extends Component<*> {
     return { years: { ...years, [matchDate.getFullYear()]: ++currentNumber } };
   };
 
+  favoriteTeam = (currentValue: Match, prevValue: *) => {
+    const { clubs } = prevValue;
+    let currentHomeTeam = clubs[currentValue.homeTeam] || 0;
+    let currentAwayTeam = clubs[currentValue.awayTeam] || 0;
+    return {
+      clubs: {
+        ...clubs,
+        [currentValue.homeTeam]: ++currentHomeTeam,
+        [currentValue.awayTeam]: ++currentAwayTeam,
+      },
+    };
+  };
+
+  getFavClub = (clubs: *) => {
+    return Object.entries(clubs).reduce(
+      (prevValue, [club, seen]) => {
+        if (prevValue.seen < seen) {
+          prevValue.club = club;
+          prevValue.seen = seen;
+        }
+        return prevValue;
+      },
+      { club: '', seen: 0 },
+    );
+  };
+
   data = (matches: Array<Match>) => {
     const data = matches.reduce(
       (prevValue, currentValue) => {
@@ -53,12 +79,14 @@ export class StatisticsContainer extends Component<*> {
         const matchWithMostGoals = this.matchWithMostGoals(currentValue, prevValue, numberOfGoals);
         const numberOfVictories = this.numberOfVicotires(prevValue, currentValue);
         const numberOfMatchesAYear = this.numberOfMatchesAYear(currentValue, prevValue);
+        const clubs = this.favoriteTeam(currentValue, prevValue);
         prevValue.totalGoals += numberOfGoals;
         return {
           ...prevValue,
           ...matchWithMostGoals,
           ...numberOfVictories,
           ...numberOfMatchesAYear,
+          ...clubs,
         };
       },
       {
@@ -69,9 +97,12 @@ export class StatisticsContainer extends Component<*> {
         years: {},
         avgGoal: 0,
         numberOfGoals: 0,
+        clubs: {},
+        favClub: {},
       },
     );
     data.avgGoal += data.totalGoals / matches.length;
+    data.favClub = this.getFavClub(data.clubs);
     return data;
   };
 

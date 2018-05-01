@@ -19,9 +19,6 @@ class GetPhoto extends Component<*, State> {
     resultData: {},
   };
 
-  date: ?string;
-  uri: string;
-
   getDate = (data: any) => {
     if (data) {
       if (data.GPSDateStamp) {
@@ -43,29 +40,28 @@ class GetPhoto extends Component<*, State> {
       aspect: [4, 3],
       exif: true,
     });
-
     if (!result.cancelled) {
-      this.date = this.getDate(result.exif);
-      this.uri = result.uri;
-      const coordinate = _get(result, 'exif.GPSLatitude');
-      if (!this.date) {
+      const date = this.getDate(result.exif);
+      // const date = '2014/03/15';
+      const { GPSLatitude, GPSLongitude } = _get(result, 'exif');
+      if (!date) {
         // Pretend to be smart
         setTimeout(() => {
           this.props.showNoMetaDataModal();
         }, 2000);
-      } else if (!coordinate) {
+      } else if (!GPSLatitude || !GPSLongitude) {
         // Pretend to be smart
         setTimeout(() => {
-          this.props.showSearchClubModal(this.uri, this.date);
+          this.props.showSearchClubModal(result.uri, date);
         }, 2000);
       } else {
         const location = {
-          lat: result.exif.GPSLatitude,
-          long: result.exif.GPSLongitude,
-          date: this.date,
+          lat: GPSLatitude,
+          long: GPSLongitude,
+          date,
         };
 
-        this.props.navigation.navigate('MatchView', { ...location, uri: this.uri });
+        this.props.navigation.navigate('MatchView', { ...location, uri: result.uri });
       }
     } else {
       this.props.onBack();

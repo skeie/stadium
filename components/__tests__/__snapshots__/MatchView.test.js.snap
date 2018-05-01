@@ -724,7 +724,7 @@ exports[`Matchview MatchView renders correctly 1`] = `
 <View
   backgroundColor="#ADF1D2"
   flex={1}
-  paddingTop={30}
+  paddingTop={10}
 >
   <RCTScrollView
     contentContainerStyle={

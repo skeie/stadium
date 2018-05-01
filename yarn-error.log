@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js flow
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js test
 
 PATH: 
   /Users/trulsskeie/Documents/fun/stadium/node_modules/.bin:/Users/trulsskeie/Documents/fun/node_modules/.bin:/Users/trulsskeie/Documents/node_modules/.bin:/Users/trulsskeie/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/bin:/usr/local/Cellar/git/2.13.2/libexec/git-core:/Users/trulsskeie/.pyenv/shims:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/trulsskeie/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/trulsskeie/Library/Android/sdk/tools:/Users/trulsskeie/Library/Android/sdk/platform-tools
@@ -6225,9 +6225,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
+  Exit code: 1
   Command: sh
-  Arguments: -c /Users/trulsskeie/Documents/fun/stadium/node_modules/.bin/flow
+  Arguments: -c node ./node_modules/jest/bin/jest.js
   Directory: /Users/trulsskeie/Documents/fun/stadium
   Output:
   

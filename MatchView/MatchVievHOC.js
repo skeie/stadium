@@ -44,8 +44,8 @@ class MatchViewContainer extends Component<Props, *> {
   }
 
   render() {
-    const { loading } = this.props.matchQuery;
-    if (loading && !this.state.match) {
+    const { loading, error } = this.props.matchQuery;
+    if ((loading && !this.state.match) || error) {
       return (
         <View flex={1} justifyContent="center" alignItems="center">
           <Loading />

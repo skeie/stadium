@@ -69,7 +69,10 @@ const SearchClub = ({
           </View>
         )}
         {footballclubResult && (
-          <ScrollView style={{ width: '100%' }} keyboardShouldPersistTaps="handled">
+          <ScrollView
+            style={{ width: '100%', paddingBottom: 80 }}
+            keyboardShouldPersistTaps="handled"
+          >
             {footballclubResult.map((result, index) => (
               <TouchableOpacity
                 activeOpacity={0.6}

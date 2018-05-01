@@ -8,13 +8,13 @@ class StatisticsScreen extends React.Component<*, *> {
     header: null,
   };
 
-  handleStatistics = () => {
+  onHandleGoToPhoto = () => {
     const { navigate } = this.props.navigation;
-    navigate('Main', { showFirstTimeView: true });
+    navigate('Photo');
   };
 
   render() {
-    return <Statistics onStatistics={this.handleStatistics} />;
+    return <Statistics onGoToPhoto={this.onHandleGoToPhoto} />;
   }
 }
 
